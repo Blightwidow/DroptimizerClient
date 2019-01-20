@@ -7,47 +7,236 @@ class App extends Component {
             {
                 'name': 'Champion of the Light',
                 'image': 'src/champion.png',
-                'collapsed': true,
+                'loot': [
+                    {
+                        'id': 1,
+                        'name': 'cool item'
+                    },
+                    {
+                        'id': 2,
+                        'name': 'cool item 2'
+                    },
+                    {
+                        'id': 3,
+                        'name': 'cool item 3'
+                    },
+                    {
+                        'id': 4,
+                        'name': 'cool item 4'
+                    },
+                    {
+                        'id': 5,
+                        'name': 'cool item 5'
+                    },
+                ]
             },
             {
                 'name': 'Jadefire Masters',
                 'image': 'src/jadefire.png',
-                'collapsed': true,
+                'loot': [
+                    {
+                        'id': 1,
+                        'name': 'cool item'
+                    },
+                    {
+                        'id': 2,
+                        'name': 'cool item 2'
+                    },
+                    {
+                        'id': 3,
+                        'name': 'cool item 3'
+                    },
+                    {
+                        'id': 4,
+                        'name': 'cool item 4'
+                    },
+                    {
+                        'id': 5,
+                        'name': 'cool item 5'
+                    },
+                ]
             },
             {
                 'name': 'Grong, the Revenant',
                 'image': 'src/grong.png',
-                'collapsed': true,
+                'loot': [
+                    {
+                        'id': 1,
+                        'name': 'cool item'
+                    },
+                    {
+                        'id': 2,
+                        'name': 'cool item 2'
+                    },
+                    {
+                        'id': 3,
+                        'name': 'cool item 3'
+                    },
+                    {
+                        'id': 4,
+                        'name': 'cool item 4'
+                    },
+                    {
+                        'id': 5,
+                        'name': 'cool item 5'
+                    },
+                ]
             },
             {
                 'name': 'Opulence',
                 'image': 'src/opulence.png',
-                'collapsed': true,
+                'loot': [
+                    {
+                        'id': 1,
+                        'name': 'cool item'
+                    },
+                    {
+                        'id': 2,
+                        'name': 'cool item 2'
+                    },
+                    {
+                        'id': 3,
+                        'name': 'cool item 3'
+                    },
+                    {
+                        'id': 4,
+                        'name': 'cool item 4'
+                    },
+                    {
+                        'id': 5,
+                        'name': 'cool item 5'
+                    },
+                ]
             },
             {
                 'name': 'Conclave of the Chosen',
                 'image': 'src/conclave.png',
-                'collapsed': true,
+                'loot': [
+                    {
+                        'id': 1,
+                        'name': 'cool item'
+                    },
+                    {
+                        'id': 2,
+                        'name': 'cool item 2'
+                    },
+                    {
+                        'id': 3,
+                        'name': 'cool item 3'
+                    },
+                    {
+                        'id': 4,
+                        'name': 'cool item 4'
+                    },
+                    {
+                        'id': 5,
+                        'name': 'cool item 5'
+                    },
+                ]
             },
             {
                 'name': 'King Rastakhan',
                 'image': 'src/king.png',
-                'collapsed': true,
+                'loot': [
+                    {
+                        'id': 1,
+                        'name': 'cool item'
+                    },
+                    {
+                        'id': 2,
+                        'name': 'cool item 2'
+                    },
+                    {
+                        'id': 3,
+                        'name': 'cool item 3'
+                    },
+                    {
+                        'id': 4,
+                        'name': 'cool item 4'
+                    },
+                    {
+                        'id': 5,
+                        'name': 'cool item 5'
+                    },
+                ]
             },
             {
                 'name': 'High Tinker Mekkatorque',
                 'image': 'src/tinker.png',
-                'collapsed': true,
+                'loot': [
+                    {
+                        'id': 1,
+                        'name': 'cool item'
+                    },
+                    {
+                        'id': 2,
+                        'name': 'cool item 2'
+                    },
+                    {
+                        'id': 3,
+                        'name': 'cool item 3'
+                    },
+                    {
+                        'id': 4,
+                        'name': 'cool item 4'
+                    },
+                    {
+                        'id': 5,
+                        'name': 'cool item 5'
+                    },
+                ]
             },
             {
                 'name': 'Stormwall Blockade',
                 'image': 'src/blockade.png',
-                'collapsed': true,
+                'loot': [
+                    {
+                        'id': 1,
+                        'name': 'cool item'
+                    },
+                    {
+                        'id': 2,
+                        'name': 'cool item 2'
+                    },
+                    {
+                        'id': 3,
+                        'name': 'cool item 3'
+                    },
+                    {
+                        'id': 4,
+                        'name': 'cool item 4'
+                    },
+                    {
+                        'id': 5,
+                        'name': 'cool item 5'
+                    },
+                ]
             },
             {
                 'name': 'Lady Jaina Proudmoore',
                 'image': 'src/jaina.png',
-                'collapsed': true,
+                'loot': [
+                    {
+                        'id': 1,
+                        'name': 'cool item'
+                    },
+                    {
+                        'id': 2,
+                        'name': 'cool item 2'
+                    },
+                    {
+                        'id': 3,
+                        'name': 'cool item 3'
+                    },
+                    {
+                        'id': 4,
+                        'name': 'cool item 4'
+                    },
+                    {
+                        'id': 5,
+                        'name': 'cool item 5'
+                    },
+                ]
             }
         ]
     };
