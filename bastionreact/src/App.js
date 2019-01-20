@@ -7,40 +7,50 @@ class App extends Component {
             {
                 'name': 'Champion of the Light',
                 'image': 'src/champion.png',
+                'hidden': true,
             },
             {
                 'name': 'Jadefire Masters',
                 'image': 'src/jadefire.png',
+                'hidden': true,
             },
             {
                 'name': 'Grong, the Revenant',
                 'image': 'src/grong.png',
+                'hidden': true,
             },
             {
                 'name': 'Opulence',
                 'image': 'src/opulence.png',
+                'hidden': true,
             },
             {
                 'name': 'Conclave of the Chosen',
                 'image': 'src/conclave.png',
+                'hidden': true,
             },
             {
                 'name': 'King Rastakhan',
                 'image': 'src/king.png',
+                'hidden': true,
             },
             {
                 'name': 'High Tinker Mekkatorque',
                 'image': 'src/tinker.png',
+                'hidden': true,
             },
             {
                 'name': 'Stormwall Blockade',
                 'image': 'src/blockade.png',
+                'hidden': true,
             },
             {
                 'name': 'Lady Jaina Proudmoore',
                 'image': 'src/jaina.png',
+                'hidden': true,
             }
         ]
+
     };
     render() {
         return (
