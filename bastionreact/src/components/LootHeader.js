@@ -5,7 +5,7 @@ class BossHeader extends Component {
         return (
             <div className="LootHeader bg-dark rounded">
                 <img className="LootImage" alt="" src={this.props.loot.image} />
-                <h2 className="ItemName text-light">{this.props.loot.name}</h2>
+                <h2 className="LootName text-light">{this.props.loot.name}</h2>
             </div>
         );
     }

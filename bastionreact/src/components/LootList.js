@@ -8,7 +8,7 @@ class LootList extends Component {
             lootHeaders.push(<LootHeader loot={this.props.loot[i]} key={i} />)
         }
         return (
-            <div className="BigBox bg-dark rounded d-flex p-3 m-2 align-items-center">
+            <div className="LootList bg-dark rounded d-flex p-3 m-2 align-items-center">
                 {lootHeaders}
             </div>
         );
