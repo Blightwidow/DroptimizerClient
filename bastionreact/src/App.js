@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import BigBox from './BigBox';
+import BossHeader from './components/BossHeader';
 
 class App extends Component {
     state = {
@@ -7,69 +7,62 @@ class App extends Component {
             {
                 'name': 'Champion of the Light',
                 'image': 'src/champion.png',
-                'hidden': true,
+                'collapsed': true,
             },
             {
                 'name': 'Jadefire Masters',
                 'image': 'src/jadefire.png',
-                'hidden': true,
+                'collapsed': true,
             },
             {
                 'name': 'Grong, the Revenant',
                 'image': 'src/grong.png',
-                'hidden': true,
+                'collapsed': true,
             },
             {
                 'name': 'Opulence',
                 'image': 'src/opulence.png',
-                'hidden': true,
+                'collapsed': true,
             },
             {
                 'name': 'Conclave of the Chosen',
                 'image': 'src/conclave.png',
-                'hidden': true,
+                'collapsed': true,
             },
             {
                 'name': 'King Rastakhan',
                 'image': 'src/king.png',
-                'hidden': true,
+                'collapsed': true,
             },
             {
                 'name': 'High Tinker Mekkatorque',
                 'image': 'src/tinker.png',
-                'hidden': true,
+                'collapsed': true,
             },
             {
                 'name': 'Stormwall Blockade',
                 'image': 'src/blockade.png',
-                'hidden': true,
+                'collapsed': true,
             },
             {
                 'name': 'Lady Jaina Proudmoore',
                 'image': 'src/jaina.png',
-                'hidden': true,
+                'collapsed': true,
             }
         ]
-
     };
     render() {
+        let bossHeaders = [];
+        for (var i = 0; i < this.state.bosses.length; i++) {
+            bossHeaders.push(<BossHeader boss={this.state.bosses[i]} key={i} />)
+        }
+
         return (
             <div className="container">
-                <BigBox bossData={this.state.bosses} />
+                {bossHeaders}
             </div>
         );
     }
-    removeCharacter = index => {
-        const { bosses } = this.state;
-    
-        this.setState({
-            bosses: bosses.filter((character, i) => { 
-                return i !== index;
-            })
-        });
-    }
 }
-
-
 
 export default App;
