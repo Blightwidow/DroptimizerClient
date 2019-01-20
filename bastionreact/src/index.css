@@ -9,6 +9,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.DropList{
+  background-color: rgb(40,40,40);
+  height: 600px;
+  width: 95%;
+  
+}
+.Item{
+  background-color: red;
+  height: 80px;
+  width: 40px;
+}
+
 .bg-dark{
   background-color: #222 !important;
 }
