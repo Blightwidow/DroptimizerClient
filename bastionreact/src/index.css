@@ -9,9 +9,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.DropList{
+.LootList{
   background-color: rgb(40,40,40);
-  height: 600px;
   width: 95%;
   
 }
@@ -20,9 +19,57 @@ body {
   height: 80px;
   width: 40px;
 }
-
+.playerScroller{
+  background-color: rgb(30,30,30);
+}
+.PlayerImage{
+  width: 40px;
+}
 .bg-dark{
   background-color: #222 !important;
+}
+
+.armoryLink{
+  text-decoration: none !important;
+}
+.itemText{
+  color: #a335ee !important;
+}
+.class1{
+  color: #C79C6E !important;
+}
+.class2{
+  color: #F58CBA !important;
+}
+.class3{
+  color: #ABD473 !important;
+}
+.class4{
+  color: #FFF569 !important;
+}
+.class5{
+  color: #FFFFFF !important;
+}
+.class6{
+  color: #C41F3B !important;
+}
+.class7{
+  color: #0070DE !important;
+}
+.class8{
+  color: #40C7EB !important;
+}
+.class9{
+  color: #8787ED !important;
+}
+.class10{
+  color: #00FF96 !important;
+}
+.class11{
+  color: #FF7D0A !important;
+}
+.class12{
+  color: #A330C9 !important;
 }
 
 code {

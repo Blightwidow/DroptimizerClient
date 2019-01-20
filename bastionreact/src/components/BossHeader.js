@@ -1,33 +1,30 @@
 import React, {Component} from 'react';
-import DropList from './DropList';
+import LootList from './LootList';
 
 class BossHeader extends Component {
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
-          childVisible: false
+            collapsed: true,
         }
+    }
+
+    onHeaderClick = (event) => {
+        this.setState({
+            collapsed: !this.state.collapsed
+        });
     }
 
     render() {
         return (
-            <div className="BossBox align-items-center">
-                <div className="BossHeader bg-dark rounded d-flex p-3 mt-2 mx-2 align-items-center">
+            <div className="BossWrapper align-items-center">
+                <div className="BossHeader bg-dark rounded d-flex p-3 mt-2 mx-2 align-items-center" onClick={this.onHeaderClick}>
                     <img className="BossImage" alt="" src={this.props.boss.image} />
-                    <h2 className="BossName text-light align-middle">{this.props.boss.name}</h2>
-                    <button className="btn text-light mx-5" onClick={() => this.onClick()}>Toggle</button>
+                    <h3 className="BossName text-light align-middle">{this.props.boss.name}</h3>
                 </div>
-                {
-                this.state.childVisible
-                    ? <DropList/>
-                    : null
-                }
+                { this.state.collapsed ? null : <LootList loot={this.props.boss.loot} players={this.props.players}/> }
             </div>
         );
-    }
-
-    onClick() {
-        this.setState(prevState => ({ childVisible: !prevState.childVisible }));
     }
 }
 
