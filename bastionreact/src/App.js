@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import BossHeader from './components/BossHeader';
+import axios from 'axios'
 
 class App extends Component {
+
     state = {
         bosses: [
             {
@@ -9,28 +11,31 @@ class App extends Component {
                 'image': 'src/champion.png',
                 'loot': [
                     {
-                        'id': 1,
-                        'name': 'cool item',
+                        'id': 165924,
+                        'name': "High Tinker's Cape",
+                        'image': 'src/item.jpg',
+                        'upgrades': [
+
+                        ]
+                    },
+                    {
+                        'id': 165568,
+                        'name': "Invocation of Yu'lon",
                         'image': 'src/item.jpg'
                     },
                     {
-                        'id': 2,
-                        'name': 'cool item 2',
+                        'id': 165567,
+                        'name': 'Seal of the Zandalari Empire',
                         'image': 'src/item.jpg'
                     },
                     {
-                        'id': 3,
-                        'name': 'cool item 3',
+                        'id': 165546,
+                        'name': 'Slimy Kelpweavers',
                         'image': 'src/item.jpg'
                     },
                     {
-                        'id': 4,
-                        'name': 'cool item 4',
-                        'image': 'src/item.jpg'
-                    },
-                    {
-                        'id': 5,
-                        'name': 'cool item 5',
+                        'id': 19019,
+                        'name': 'Thunderfury, Blessed Blade of the Windseeker',
                         'image': 'src/item.jpg'
                     },
                 ]
@@ -285,44 +290,21 @@ class App extends Component {
             }
         ],
         players:[
-            {
-                'name': 'Bowbi',
-                'class': 10,
-                'image': 'src/avatar.png'
-            },
-            {
-                'name': 'Arwic',
-                'class': 3,
-                'image': 'src/avatar.png'
-            },
-            {
-                'name': 'Monkaxd',
-                'class': 12,
-                'image': 'src/avatar.png'
-            },
-            {
-                'name': 'Subduce',
-                'class': 7,
-                'image': 'src/avatar.png'
-            },
-            {
-                'name': 'Brbteabreaktv',
-                'class': 8,
-                'image': 'src/avatar.png'
-            },
-            {
-                'name': 'Shittytrial',
-                'class': 1,
-                'image': 'src/avatar.png'
-            }
+
         ]
     };
+
+    componentDidMount(){
+        axios.get('http://127.0.0.1:3000/1/character',{ crossdomain: true } )
+            .then(response => this.setState({players: response.data}))
+        console.log("got player list");
+    }
+
     render() {
         let bossHeaders = [];
         for (var i = 0; i < this.state.bosses.length; i++) {
-            bossHeaders.push(<BossHeader boss={this.state.bosses[i]} players={this.state.players} key={i} />)
+            bossHeaders.push(<BossHeader boss={this.state.bosses[i]} players={this.state.players} updatePlayerList={this.updatePlayerList} key={i} />)
         }
-
         return (
             <div className="container align-items-center">
                 {bossHeaders}
