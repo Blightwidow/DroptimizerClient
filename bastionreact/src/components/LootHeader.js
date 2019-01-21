@@ -22,7 +22,8 @@ class LootHeader extends Component {
                         <div className="row">
                             <div className="col-12 d-flex align-items-center pl-3">
                                 <img className="LootImage mr-3 rounded" alt="" src={this.props.loot.image} />
-                                <h4 className="LootName itemText">{"["+this.props.loot.name+"]"}</h4>
+                                <a href="#" data-wowhead="item=2828" data-wh-rename-link="true"><h4 className="LootName itemText" >{"["+this.props.loot.name+"]"}</h4></a>
+                                
                             </div>
                             { this.state.collapsed ? null : 
                                 <div className="text-light p-3 mt-2 ml-5">
