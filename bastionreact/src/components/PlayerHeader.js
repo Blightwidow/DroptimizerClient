@@ -10,10 +10,6 @@ class PlayerHeader extends Component {
 
     }
 
-
-
-    
-    
     render() {
         if(this.props.noPlayers == false){
             let cls = "class" + this.props.player.class;
@@ -42,7 +38,7 @@ class PlayerHeader extends Component {
             <div className="PlayerListItem">
                 <div className="PlayerWrapper pr-auto w-50">
                     <div className="PlayerHeader d-flex align-items-center py-2">
-                        <h5 className="PlayerName pl-3 pt-1 text-muted">No Player Data</h5>
+                        <h5 className="pl-3 pt-1 text-muted">No Player Data</h5>
                     </div>
                 </div>
             </div>
