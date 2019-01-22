@@ -7,11 +7,10 @@ class PlayerHeader extends Component {
             this.setState({upgrade : response.data})
             console.log(response.data);
         }
-
     }
 
     render() {
-        if(this.props.noPlayers == false){
+        if(this.props.noPlayers === false){
             let cls = "class" + this.props.player.class;
             let upgradeMean = this.props.player.mean;
             return (
@@ -19,7 +18,7 @@ class PlayerHeader extends Component {
                     <div className="PlayerWrapper unselectable">  
                         <div className="PlayerHeader col align-items-center row py-2">
                             <h4 className="PlayerRank text-center">{this.props.value+1}</h4>
-                            <a className="armoryLink" href={"https://worldofwarcraft.com/en-us/character/frostmourne/"+this.props.player.name } target="_blank">
+                            <a className="armoryLink" href={"https://worldofwarcraft.com/en-us/character/"+this.props.player.realm+"/"+this.props.player.name } rel="noopener noreferrer" target="_blank">
                                 <div className="row">
                                     <div className="col d-flex align-middle align-items-center">
                                         <img className="PlayerImage rounded mr-2 align-items-center " alt="" src={"http://render-"+this.props.player.region+".worldofwarcraft.com/character/"+this.props.player.thumbnail}/>
