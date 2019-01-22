@@ -8,6 +8,8 @@ class PlayerList extends Component {
         super();
         this.state = {
             upgrades : [],
+            boundaryH : 0,
+            boundaryL : 100,
         }
     }
 
@@ -16,6 +18,19 @@ class PlayerList extends Component {
             var obj = [...this.state.upgrades];
             obj.sort((a,b) => a.mean < b.mean ? 1 : -1);
             this.setState({upgrades:obj});
+        }
+        for(let i = 0; i < this.state.upgrades.length; i++){
+            let base = this.state.upgrades[i].base_dps_mean;
+            let mean = this.state.upgrades[i].mean;
+            let increaseDps = mean - base;
+            let percent = increaseDps / base * 100;
+            if(percent > this.state.boundaryH){
+                this.setState({boundaryH : percent});
+            }
+            if(percent < this.state.boundaryL){
+                this.setState({boundaryL : percent});
+            }
+            console.log(this.state.upgrades[i].mean)
         }
 
     }
@@ -64,9 +79,16 @@ class PlayerList extends Component {
             playerHeaders.push(<PlayerHeader player={this.props.players[i]} key={i} value={i} item={this.props.item} />)
         }
         */
-       console.log(playerHeaders);
+        console.log(playerHeaders);
         for (var i = 0; i < this.state.upgrades.length; i++) {
-            playerHeaders.push(<PlayerHeader player={this.state.upgrades[i]} key={i} value={i} item={this.props.item} noPlayers={false} />)
+            let plr = null;
+            for (var j = 0; j < this.props.players.length; j++) {
+                if(this.props.players[j].name === this.state.upgrades[i].name){
+                    plr = this.props.players[j];
+                    console.log("Found player "+this.props.players[j].name);
+                }
+            }
+            playerHeaders.push(<PlayerHeader player={this.state.upgrades[i]} boundaryH={this.state.boundaryH} boundaryL={this.state.boundaryL} key={i} value={i} item={this.props.item} noPlayers={false} />)
         }
         if(playerHeaders.length === 0){
             console.log("No players!");

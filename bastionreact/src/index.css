@@ -79,10 +79,15 @@ body {
   width: 40px;
 }
 .PlayerName{
-  width: 5.5em;
+  min-width: 6em;
+  font-size: 1.1em;
+  margin-right: 0.5em;
 }
 .PlayerSim{
   font-size: 1.15rem;
+}
+.percentText{
+  font-size: 1.5rem;
 }
 .rank1{
   color: rgb(255, 196, 0);
