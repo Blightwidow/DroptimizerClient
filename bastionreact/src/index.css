@@ -25,6 +25,7 @@ body {
 /* width */
 .playerScroller::-webkit-scrollbar-track
 {
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	border-radius: .25rem!important;
 }
@@ -37,9 +38,20 @@ body {
 
 .playerScroller::-webkit-scrollbar-thumb
 {
-	border-radius: .25rem!important;
+  border-radius: .25rem!important;
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #333;
+}
+
+.searchBar{
+  background-color: rgb(30,30,30);
+  border-color: rgb(22,22,22);
+}
+.searchBar:focus{
+  background-color: rgb(32, 32, 32);
+  border-color: rgb(22,22,22);
+  box-shadow: 0 0 0 0.2rem rgba(108,117,125,.5);
 }
 
 .PlayerListItem:nth-child(even){
@@ -58,11 +70,11 @@ body {
 }
 .LootImage{
   height: 48px;
+  box-shadow: 0 0 6px rgba(163, 53, 238, 0.7)
 }
-.Item{
-  background-color: red;
-  height: 80px;
-  width: 40px;
+.yeetGif{
+  opacity: 0.4;
+  filter: grayscale(60%);
 }
 .playerScroller{
   background-color: rgb(30,30,30);
@@ -122,6 +134,12 @@ body {
 
 .armoryLink{
   text-decoration: none !important;
+}
+.armoryLink:hover img{
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+}
+.armoryLink:hover h5{
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.4);
 }
 .itemText{
   color: #a335ee !important;
