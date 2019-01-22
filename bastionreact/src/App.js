@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import BossHeader from './components/BossHeader';
+import PageHeader from './components/PageHeader';
 import axios from 'axios'
 
 class App extends Component {
@@ -307,6 +308,7 @@ class App extends Component {
         }
         return (
             <div className="container align-items-center">
+                <PageHeader bosses={this.state.bosses} players={this.state.players} />
                 {bossHeaders}
             </div>
         );

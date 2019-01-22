@@ -19,7 +19,7 @@ class BossHeader extends Component {
     render() {
         return (
             <div className="BossWrapper align-items-center">
-                <div className="BossHeader unselectable bg-dark rounded d-flex p-3 mt-2 mx-2 align-items-center" onClick={this.onHeaderClick}>
+                <div className="BossHeader unselectable bg-dark rounded d-flex pt-2 px-2 mt-2 mx-2 align-items-center" onClick={this.onHeaderClick}>
                     <img className="BossImage" alt="" src={this.props.boss.image} />
                     <h3 className="BossName text-light align-middle">{this.props.boss.name}</h3>
                 </div>

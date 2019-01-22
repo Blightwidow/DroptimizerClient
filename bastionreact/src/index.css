@@ -18,6 +18,10 @@ body {
   user-select: none;
 }
 
+.BossName{
+  font-size: 1.3em;
+}
+
 /* width */
 .playerScroller::-webkit-scrollbar-track
 {
@@ -47,8 +51,13 @@ body {
 
 .LootList{
   background-color: rgb(40,40,40);
-  width: 95%;
-  
+  width: 95%; 
+}
+.LootName{
+  font-size: 1.2em;
+}
+.LootImage{
+  height: 48px;
 }
 .Item{
   background-color: red;
@@ -71,6 +80,36 @@ body {
 }
 .PlayerName{
   width: 5.5em;
+}
+.PlayerSim{
+  font-size: 1.15rem;
+}
+.rank1{
+  color: rgb(255, 196, 0);
+}
+.rank2{
+  color: rgb(211, 211, 211);
+}
+.rank3{
+  color: rgb(126, 77, 31);
+}
+.graphSVG{
+  vertical-align: middle;
+}
+.svgLine1{
+  fill: rgb(16,16,16);
+}
+.svgLine2{
+  fill: rgb(72, 134, 0);
+}
+.svgCircle{
+  fill: rgb(211, 95, 0);
+}
+.text-success{
+  color: rgb(72, 134, 0) !important;
+}
+.text-light{
+  color: rgb(220,220,220) !important;
 }
 .bg-dark{
   background-color: #222 !important;
