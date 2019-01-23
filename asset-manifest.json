@@ -1,13 +1,13 @@
 {
-  "main.css": "/DroptimizerClient/static/css/main.16658b83.chunk.css",
-  "main.js": "/DroptimizerClient/static/js/main.9ed168b3.chunk.js",
-  "main.js.map": "/DroptimizerClient/static/js/main.9ed168b3.chunk.js.map",
-  "static/js/1.4429b15e.chunk.js": "/DroptimizerClient/static/js/1.4429b15e.chunk.js",
-  "static/js/1.4429b15e.chunk.js.map": "/DroptimizerClient/static/js/1.4429b15e.chunk.js.map",
-  "runtime~main.js": "/DroptimizerClient/static/js/runtime~main.631e64d1.js",
-  "runtime~main.js.map": "/DroptimizerClient/static/js/runtime~main.631e64d1.js.map",
-  "static/css/main.16658b83.chunk.css.map": "/DroptimizerClient/static/css/main.16658b83.chunk.css.map",
-  "index.html": "/DroptimizerClient/index.html",
-  "precache-manifest.5788b36b5bc817f2d81c7a1d8a426c32.js": "/DroptimizerClient/precache-manifest.5788b36b5bc817f2d81c7a1d8a426c32.js",
-  "service-worker.js": "/DroptimizerClient/service-worker.js"
+  "main.css": "/static/css/main.16658b83.chunk.css",
+  "main.js": "/static/js/main.9ed168b3.chunk.js",
+  "main.js.map": "/static/js/main.9ed168b3.chunk.js.map",
+  "static/js/1.4429b15e.chunk.js": "/static/js/1.4429b15e.chunk.js",
+  "static/js/1.4429b15e.chunk.js.map": "/static/js/1.4429b15e.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
+  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
+  "static/css/main.16658b83.chunk.css.map": "/static/css/main.16658b83.chunk.css.map",
+  "index.html": "/index.html",
+  "precache-manifest.56821db7befcaddd9d73f55993e965cf.js": "/precache-manifest.56821db7befcaddd9d73f55993e965cf.js",
+  "service-worker.js": "/service-worker.js"
 }
