@@ -2,7 +2,7 @@
   "name": "bastionreact",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://arwic.github.io/DroptimizerClient",
+  "homepage": "https://loot.arwic.io",
   "dependencies": {
     "axios": "^0.18.0",
     "gh-pages": "^2.0.1",
