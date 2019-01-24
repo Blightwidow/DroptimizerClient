@@ -31,7 +31,7 @@ class PlayerHeader extends Component {
                 sign = '-';
                 signCls = "negative";
             }
-            
+
             let upper = upperBound - lowerBound;
             let perc = myPercent -lowerBound;
             perc = perc / upper;
@@ -77,7 +77,7 @@ class PlayerHeader extends Component {
                                         </div>
                                     </a>
                                     <div className="col d-flex p-0 justify-content-center">
-                                        <a className="d-flex align-items-center mb-1" href="https://raidbots.com" target="_blank">
+                                        <a className="d-flex align-items-center mb-1" href={"https://raidbots.com/simbot/report/"+this.props.player.reportID} target="_blank">
                                             <img className="rbIco mx-2" src={'src/'+this.props.rbIco} alt="" height="30px" />
                                         </a>
                                     </div>
