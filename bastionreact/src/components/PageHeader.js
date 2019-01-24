@@ -109,10 +109,10 @@ class PageHeader extends Component {
                     </div>
                     <div className="modal-body">
                         <div className="row d-flex">
-                            <div className="col p-0 mx-1">
+                            <div className="col p-0 pl-2 mx-1">
                                 {leftPlayer}
                             </div>
-                            <div className="col p-0 mx-1">
+                            <div className="col p-0 pr-2 mx-1">
                                 {rightPlayer}
                             </div>
                         </div>
@@ -136,7 +136,7 @@ class PageHeader extends Component {
                                                 <img className="wowIco" src="src/wowico.png" alt="" />
                                             </button>
                                         </div>
-                                        <input type="text" onChange={event => this.updateInputValue(event)} className="form-control searchBar text-light" placeholder="Yeet" aria-label="Search" />
+                                        <input type="text" onChange={event => this.updateInputValue(event)} className="form-control searchBar text-light" placeholder="Search Items" aria-label="Search" />
                                         <div className="input-group-append">
                                             <button className="btn btn-outline-secondary searchBar" type="button">
                                                 <i className="fas fa-search searchIcon"></i>

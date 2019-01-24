@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PlayerHeader from './PlayerHeader';
 import axios from 'axios';
 
-const API_UPGRADE = 'http://127.0.0.1:3000/1/upgrade/'//'https://api.arwic.io/droptimizer/1/upgrade/';
+const API_UPGRADE = 'https://api.arwic.io/droptimizer/1/upgrade/';
 
 class PlayerList extends Component {
 
