@@ -90,6 +90,7 @@ class PageHeader extends Component {
         if(playerList.length === 0){
             this.setState({noPlayers: true});
         }
+        
         if(term === ''){
             this.setState({noLoot: true});
             this.setState({noPlayers: true});
@@ -100,7 +101,7 @@ class PageHeader extends Component {
             this.setState({noLoot: true});
             this.setState({noPlayers: true});
             this.setState({collapsed: true});
-            this.props.setBossCollapse(false);
+            this.props.setBossCollapse(true);
         }
         
         
