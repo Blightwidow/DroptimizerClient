@@ -16,6 +16,13 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: default;
+}
+.negative{
+  color: rgb(180, 28, 28) !important;
+}
+.positive{
+  color: rgb(72, 134, 0) !important;
 }
 
 .BossName{
@@ -89,6 +96,8 @@ body {
   filter: grayscale(60%);
 }
 .playerScroller{
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: rgb(30,30,30);
   max-height: 20em;
   padding: 0px;
@@ -215,6 +224,14 @@ code {
   padding-bottom: 0px;
   padding-left: 0.5em;
   padding-right: 0.5em;
+}
+.rbIco{
+  height: 30px;
+  filter: grayscale(100%) brightness(40%);
+  
+}
+.rbIco:hover{
+  filter: grayscale(0%) brightness(80%);
 }
 
 .PlayerModalImage{
