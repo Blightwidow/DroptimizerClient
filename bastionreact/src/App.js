@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import BossHeader from './components/BossHeader';
+import BossWrapper from './components/BossWrapper';
 import PageHeader from './components/PageHeader';
 import axios from 'axios'
+
+const API_CHARACTER = 'http://127.0.0.1:3000/1/character';
+const API_ITEM = 'http://127.0.0.1:3000/1/item/'
 
 class App extends Component {
 
@@ -407,24 +410,43 @@ class App extends Component {
         ],
         players:[
 
-        ]
+        ],
+        bossCollapsed : false,
     };
 
+    updateItemState = (i, j) =>{
+        axios.get(API_ITEM+this.state.bosses[i].loot[j].id,{ crossdomain: true } )
+            .then(response => {
+                this.setState(state => {
+                    state.bosses[i].loot[j] = response.data;
+                    return state
+                    })
+            });
+        
+    } 
+
     componentDidMount(){
-        axios.get('http://127.0.0.1:3000/1/character',{ crossdomain: true } )
+        axios.get(API_CHARACTER,{ crossdomain: true } )
             .then(response => this.setState({players: response.data}))
         console.log("got player list");
+
+        for (var i = 0; i < this.state.bosses.length; i++) {
+            for (var j = 0; j < this.state.bosses[i].loot.length; j++){
+                this.updateItemState(i, j);
+            }
+        }
+    }
+
+    setBossCollapse = (boo) =>{
+        this.setState({bossCollapsed : boo});
     }
 
     render() {
-        let bossHeaders = [];
-        for (var i = 0; i < this.state.bosses.length; i++) {
-            bossHeaders.push(<BossHeader boss={this.state.bosses[i]} players={this.state.players} updatePlayerList={this.updatePlayerList} key={i} />)
-        }
+        
         return (
             <div className="container align-items-center">
-                <PageHeader bosses={this.state.bosses} players={this.state.players} />
-                {bossHeaders}
+                <PageHeader bosses={this.state.bosses} players={this.state.players} setBossCollapse = {this.setBossCollapse} />
+                { this.state.bossCollapsed ? null : <BossWrapper bosses={this.state.bosses} players={this.state.players} /> }
             </div>
         );
     }

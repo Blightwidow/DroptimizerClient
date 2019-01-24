@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PlayerHeader from './PlayerHeader';
 import axios from 'axios';
 
+const API_UPGRADE = 'http://127.0.0.1:3000/1/upgrade/';
+
 class PlayerList extends Component {
 
     constructor(props) {
@@ -46,7 +48,7 @@ class PlayerList extends Component {
         let promises = [];
         let requests = [];
         for(let i = 0; i < this.props.players.length; i++){
-            let url = 'http://127.0.0.1:3000/1/upgrade/'+this.props.players[i].region+'/'+this.props.players[i].realm+'/'+this.props.players[i].name+'/'+this.props.item.id;
+            let url = API_UPGRADE+this.props.players[i].region+'/'+this.props.players[i].realm+'/'+this.props.players[i].name+'/'+this.props.item.id;
             requests.push(url);
         }
         for(let i = 0; i < requests.length; i++){
@@ -74,24 +76,11 @@ class PlayerList extends Component {
     render() {
         
         let playerHeaders = [];
-        /* DISPLAY ALL CHARACTERS IN PLAYER LIST
-        for (var i = 0; i < this.props.players.length; i++) {
-            playerHeaders.push(<PlayerHeader player={this.props.players[i]} key={i} value={i} item={this.props.item} />)
-        }
-        */
-        console.log(playerHeaders);
+        
         for (var i = 0; i < this.state.upgrades.length; i++) {
-            let plr = null;
-            for (var j = 0; j < this.props.players.length; j++) {
-                if(this.props.players[j].name === this.state.upgrades[i].name){
-                    plr = this.props.players[j];
-                    console.log("Found player "+this.props.players[j].name);
-                }
-            }
             playerHeaders.push(<PlayerHeader player={this.state.upgrades[i]} boundaryH={this.state.boundaryH} boundaryL={this.state.boundaryL} key={i} value={i} item={this.props.item} noPlayers={false} />)
         }
         if(playerHeaders.length === 0){
-            console.log("No players!");
             playerHeaders.push(<PlayerHeader player={null} key={i} value={i} item={this.props.item} noPlayers={true}/>)
         }
         return (
