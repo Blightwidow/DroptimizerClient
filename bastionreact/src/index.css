@@ -20,9 +20,11 @@ body {
 }
 .negative{
   color: rgb(180, 28, 28) !important;
+  fill : rgb(180, 28, 28) !important;
 }
 .positive{
   color: rgb(72, 134, 0) !important;
+  fill: rgb(72, 134, 0) !important;
 }
 
 .BossName{
@@ -92,6 +94,20 @@ body {
   height: 48px;
   box-shadow: 0 0 6px rgba(163, 53, 238, 0.7)
 }
+.filterBtn{
+  height: 2em;
+  width: 2em;
+  background-color: rgb(30,30,30);
+  border-color: rgb(22,22,22);
+  font-weight: 700;
+  font-size: 1em;
+}
+.filterBtn:hover{
+  background-color: rgb(30,30,30);
+}
+.filterBtn:active{
+  background-color: rgb(30,30,30) !important;
+}
 .yeetGif{
   opacity: 0.4;
   filter: grayscale(60%);
@@ -102,6 +118,23 @@ body {
   background-color: rgb(30,30,30);
   max-height: 20em;
   padding: 0px;
+}
+.rbTooltip{
+  width: 300%;
+  position: absolute;
+  float: left;
+  left: 3em;
+  top: -0.15em;
+  z-index: 10;
+  border: 1px solid rgb(22,22,22);
+}
+.rbttText{
+  font-size: 1em;
+  font-weight: 500;
+}
+.psImage{
+  height: 48px;
+
 }
 .PlayerRank{
   color: #444;

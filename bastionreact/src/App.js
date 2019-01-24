@@ -428,7 +428,6 @@ class App extends Component {
     componentDidMount(){
         axios.get(API_CHARACTER,{ crossdomain: true } )
             .then(response => this.setState({players: response.data}))
-        console.log("got player list");
 
         for (var i = 0; i < this.state.bosses.length; i++) {
             for (var j = 0; j < this.state.bosses[i].loot.length; j++){

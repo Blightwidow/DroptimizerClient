@@ -13,47 +13,73 @@ class PlayerList extends Component {
             boundaryH : 0,
             boundaryL : 100,
             hasPlayer : true,
+            showFilter : false,
+            filterClicked : false,
             icons : ['rb1.png','rb2.png','rb3.png','rb4.png','rb5.png','rb6.png','rb7.png']
         }
     }
+    
 
     sortMyArray = () =>{
         if(this.state.upgrades !== []){
             var obj = [...this.state.upgrades];
             obj.sort((a,b) => {
-                let aPercent = (a.mean - a.base_dps_mean) / a.base_dps_mean * 100;
-                let bPercent = (b.mean - b.base_dps_mean) / b.base_dps_mean * 100;
-                if(aPercent < bPercent){
-                    return 1;
+                if(this.props.isPercent){
+                    //console.log("percent");
+                    let aPercent = (a.mean - a.base_dps_mean) / a.base_dps_mean * 100;
+                    let bPercent = (b.mean - b.base_dps_mean) / b.base_dps_mean * 100;
+                    if(aPercent < bPercent){
+                        return 1;
+                    }
+                    else return -1;
                 }
-                else return -1;
+                else{
+                    //console.log('numbers');
+                    let aIncrease = a.mean - a.base_dps_mean;
+                    let bIncrease = b.mean - b.base_dps_mean;
+                    if(aIncrease < bIncrease){
+                        return 1;
+                    }
+                    else return -1;
+                }
             });
-            this.setState({upgrades:obj});
+            return obj;
         }
-        for(let i = 0; i < this.state.upgrades.length; i++){
-            let base = this.state.upgrades[i].base_dps_mean;
-            let mean = this.state.upgrades[i].mean;
-            let increaseDps = mean - base;
-            let percent = increaseDps / base * 100;
-            if(percent > this.state.boundaryH){
-                this.setState({boundaryH : percent});
-            }
-            if(percent < this.state.boundaryL){
-                this.setState({boundaryL : percent});
-            }
-            console.log(this.state.upgrades[i].mean)
-        }
+        
 
     }
+    getBoundaries = (upgrades) => {
+        let bH = 0;
+        let bL = 1000;
+        for(let i = 0; i < upgrades.length; i++){
+            let base = upgrades[i].base_dps_mean;
+            let mean = upgrades[i].mean;
+            let increaseDps = mean - base;
+            if(this.props.isPercent){
+                let percent = increaseDps / base * 100;
+                if(percent > bH ){
+                    bH = percent;
+                }
+                if(percent < bL){
+                    bL = percent;
+                }
+            }
+            else{
+                if(increaseDps > bH){
+                    bH = increaseDps;
+                }
+                if(increaseDps < bL){
+                    bL = increaseDps;
+                }
+            }
+        }
+        return [bH, bL];
+    }
+    
+
+    
 
     componentDidMount = () => {
-        /*
-        for (var i = 0; i < this.props.players.length; i++) {
-            axios.get('http://127.0.0.1:3000/1/upgrade/'+this.props.players[i].region+'/'+this.props.players[i].realm+'/'+this.props.players[i].name+'/'+this.props.item.id,{ crossdomain: true } )
-            .then(response => this.updateState(response));
-        }
-        */
-
         let promises = [];
         let requests = [];
         for(let i = 0; i < this.props.players.length; i++){
@@ -69,27 +95,25 @@ class PlayerList extends Component {
                     var newUpgrades = this.state.upgrades.slice();
                     newUpgrades.push(args[i].data);  
                     this.setState({upgrades:newUpgrades})
-                    console.log(args[i].data);
+                    //console.log(args[i].data);
+                    this.props.filter(false);
                 }
                 else{
                     this.setState({hasPlayer : false})
                 }
             }
             this.sortMyArray();
-
         }));
-        
-        //this.quick_Sort(this.state.upgrades.slice(0));
-
     }
 
     render() {
-        
         let playerHeaders = [];
+        let upgrades = this.sortMyArray();
+        let bHL = this.getBoundaries(upgrades);
         
         for (var i = 0; i < this.state.upgrades.length; i++) {
             let rand = this.state.icons[Math.floor(Math.random()*this.state.icons.length)];
-            playerHeaders.push(<PlayerHeader player={this.state.upgrades[i]} boundaryH={this.state.boundaryH} boundaryL={this.state.boundaryL} key={i} value={i} item={this.props.item} rbIco={rand} noPlayers={false} />)
+            playerHeaders.push(<PlayerHeader player={upgrades[i]} isPercent={this.props.isPercent} boundaryH={bHL[0]} boundaryL={bHL[1]} key={i} value={i} item={this.props.item} rbIco={rand} noPlayers={false} />)
         }
         if(playerHeaders.length === 0){
             playerHeaders.push(<PlayerHeader player={null} key={i} value={i} item={this.props.item} noPlayers={true} hasAnyone={this.state.hasPlayer}/>)
