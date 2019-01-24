@@ -12,6 +12,7 @@ class PlayerList extends Component {
             upgrades : [],
             boundaryH : 0,
             boundaryL : 100,
+            hasPlayer : true,
             icons : ['rb1.png','rb2.png','rb3.png','rb4.png','rb5.png','rb6.png','rb7.png']
         }
     }
@@ -70,19 +71,17 @@ class PlayerList extends Component {
                     this.setState({upgrades:newUpgrades})
                     console.log(args[i].data);
                 }
+                else{
+                    this.setState({hasPlayer : false})
+                }
             }
             this.sortMyArray();
 
         }));
+        
         //this.quick_Sort(this.state.upgrades.slice(0));
 
     }
-
-    getRandomImage = () =>{
-
-    }
-
-
 
     render() {
         
@@ -93,7 +92,7 @@ class PlayerList extends Component {
             playerHeaders.push(<PlayerHeader player={this.state.upgrades[i]} boundaryH={this.state.boundaryH} boundaryL={this.state.boundaryL} key={i} value={i} item={this.props.item} rbIco={rand} noPlayers={false} />)
         }
         if(playerHeaders.length === 0){
-            playerHeaders.push(<PlayerHeader player={null} key={i} value={i} item={this.props.item} noPlayers={true}/>)
+            playerHeaders.push(<PlayerHeader player={null} key={i} value={i} item={this.props.item} noPlayers={true} hasAnyone={this.state.hasPlayer}/>)
         }
         return (
             <div className="col-12 playerScroller rounded">

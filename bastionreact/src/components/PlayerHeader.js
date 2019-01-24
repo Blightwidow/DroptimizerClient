@@ -10,7 +10,18 @@ class PlayerHeader extends Component {
     }
 
     render() {
-        if(this.props.noPlayers === false){
+        if(this.props.noPlayers === true && this.props.hasAnyone == false){
+            return (
+                <div className="PlayerListItem">
+                    <div className="PlayerWrapper pr-auto">
+                        <div className="PlayerHeader d-flex justify-content-center align-items-center py-2">
+                        <h5 className="pl-3 pt-2 mx-2 text-muted">No Player Data</h5>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        if(this.props.noPlayers === false && this.props.hasAnyone === true){
             let cls = "class" + this.props.player.class;
             let upgradeMean = this.props.player.mean;
             let baseDps = this.props.player.base_dps_mean;
@@ -28,7 +39,7 @@ class PlayerHeader extends Component {
             let signCls = "positive"
 
             if(increaseDps <= 0){
-                sign = '-';
+                sign = '';
                 signCls = "negative";
             }
 
@@ -114,16 +125,21 @@ class PlayerHeader extends Component {
             );
         }
         else{
-        return (
-            <div className="PlayerListItem">
-                <div className="PlayerWrapper pr-auto w-50">
-                    <div className="PlayerHeader d-flex align-items-center py-2">
-                        <h5 className="pl-3 pt-1 text-muted">No Player Data</h5>
+            return (
+                <div className="PlayerListItem">
+                    <div className="PlayerWrapper pr-auto">
+                        <div className="PlayerHeader d-flex justify-content-center align-items-center py-2">
+                        <img src="src/spinner.svg" height="40px" />
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
         }
+
+        
+        
+        
         
     }
 }

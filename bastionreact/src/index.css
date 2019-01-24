@@ -74,9 +74,10 @@ body {
   background-color: #2e3030 !important;
 }
 .LootHeader {
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .LootHeader:hover {
+  cursor: pointer !important;
   background-color: #303030 !important;
 }
 .LootList{
