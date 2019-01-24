@@ -21,7 +21,7 @@ class PlayerHeader extends Component {
                 </div>
             );
         }
-        if(this.props.noPlayers === false && this.props.hasAnyone === true){
+        if(this.props.noPlayers === false){
             let cls = "class" + this.props.player.class;
             let upgradeMean = this.props.player.mean;
             let baseDps = this.props.player.base_dps_mean;
