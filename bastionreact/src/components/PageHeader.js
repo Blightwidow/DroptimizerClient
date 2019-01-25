@@ -52,27 +52,6 @@ class PageHeader extends Component {
                 }
             }
         }
-        if(term.toLowerCase() === "shit dps"){
-            for (var y = 0; y < this.props.players.length; y++){
-                if(this.props.players[y].name === "Arwic"){
-                    playerList.push(this.props.players[y]);
-                }
-            }
-        }
-        if(term.toLowerCase() === "toxic"){
-            for (var y = 0; y < this.props.players.length; y++){
-                if(this.props.players[y].name === "Sadwoofer"){
-                    playerList.push(this.props.players[y]);
-                }
-            }
-        }
-        if(term.toLowerCase() === "subs kid"){
-            for (var y = 0; y < this.props.players.length; y++){
-                if(this.props.players[y].name === "Monkaxd"){
-                    playerList.push(this.props.players[y]);
-                }
-            }
-        }
         out.sort();
         this.setState({items:out});
         this.setState({players:playerList})
@@ -203,7 +182,7 @@ class PageHeader extends Component {
                                     </div>
                                     <div className="col-2 d-flex mx-auto justify-content-center align-self-center px-1">
                                         <a href="https://www.warcraftlogs.com/guild/us/frostmourne/bastion" title="Guild Logs" target="_blank">
-                                            <img className="yeetGif" src="src/dance.gif" alt="" height="32px" />
+                                            <img className="yeetGif" src="src/wclogs.png" alt="" height="32px" />
                                         </a>
                                     </div>
                                     <div className="col-2 d-flex mx-auto justify-content-center align-self-center px-1">

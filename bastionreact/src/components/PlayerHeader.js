@@ -68,7 +68,7 @@ class PlayerHeader extends Component {
             if(increaseDps <= 0){
                 sign = '';
                 signCls = "negative";
-                perc *= -1;
+                perc = 1.5;
             }
             
 
