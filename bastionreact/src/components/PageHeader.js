@@ -2,16 +2,21 @@ import React, {Component} from 'react';
 import LootList from './LootList';
 import PlayerModal from './PlayerModal';
 import PlayerSearch from './PlayerSearch';
+import axios from 'axios';
 
+const API_UPDATE = "https://api.arwic.io/droptimizer/1/update/report/";
 
 class PageHeader extends Component {
     constructor(props) {
         super();
         this.sBar = React.createRef();
+        this.textReportID = React.createRef();
         this.state = {
             collapsed: true,
             noLoot : true,
             noPlayers : true,
+            noAlert : true,
+            alertText : '',
             searchTerm: '',
             items : [],
             players : [],
@@ -82,8 +87,6 @@ class PageHeader extends Component {
             this.setState({collapsed: true});
             this.props.setBossCollapse(true);
         }
-        
-        
     }
 
     updateInputValue(event){
@@ -126,6 +129,25 @@ class PageHeader extends Component {
             }
         }
     }
+
+    submitReport = () =>{
+        let splitList = (this.textReportID.current.value).split("/");
+        let reportID = splitList[splitList.length - 1];
+        axios.get(API_UPDATE+reportID,{ crossdomain: true } )
+            .then(response => {
+                    this.setState({alertText: response.data});
+                    this.setState({noAlert: false});
+            }
+        );
+        this.textReportID.current.value = '';
+    }
+
+    closeAlert = () =>{
+        setTimeout(function() {
+            this.setState({noAlert:true});
+            this.setState({alertText: ''});
+        }.bind(this), 500)
+    }
     
 
     render() {
@@ -149,12 +171,14 @@ class PageHeader extends Component {
         }
         
         return (
-            <div>                
+            
+            <div>  
+                              
                 <div className="modal fade " id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div className="modal-dialog " role="document">
                         <div className="modal-content bg-dark text-light">
                             <div className="modal-header ">
-                                <h5 className="modal-title align-self-center d-flex" id="exampleModalLongTitle">{"Raid Roster - " + (leftPlayer.length + rightPlayer.length)+ " Players"}</h5>
+                                <h5 className="modal-title align-self-center d-flex" id="exampleModalLongTitle">{"Bastion Raid Roster - " + (leftPlayer.length + rightPlayer.length)+ " Players"}</h5>
                                 <button type="button" className="btn btn-outline-secondary searchBar" data-dismiss="modal" aria-label="Close">
                                     Close
                                 </button>
@@ -166,6 +190,27 @@ class PageHeader extends Component {
                                     </div>
                                     <div className="col p-0 pr-2 mb-1 mx-1">
                                         {rightPlayer}
+                                    </div>
+                                </div>
+                                <div className="row d-flex">
+                                { this.state.noAlert ? null : <div className="alertWrapper mb-3"><div className="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Success!</strong> {this.state.alertText}
+                                    <button type="button" className="close" onClick={this.closeAlert} data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div></div> }
+                                    <div className="input-group w-75 px-3 mx-auto my-2">
+                                        <div className="input-group-prepend">
+                                            <button className="btn wowBtn btn-outline-secondary searchBar disabled" type="button">
+                                                <img className="wowIco" src="src/rb3.png" alt="" />
+                                            </button>
+                                        </div>
+                                        <input type="text" className="form-control searchBar text-light" ref={this.textReportID} placeholder="New Report ID" aria-label="Report ID" />
+                                        <div className="input-group-append">
+                                            <button className="btn btn-outline-secondary searchBar" onClick={this.submitReport} type="button">
+                                                <i className="fas fa-sync-alt searchIcon"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -199,13 +244,15 @@ class PageHeader extends Component {
                         </div>
                     </div>
                 </div>
+                
+                
                 <div className="PageHeaderWrapper align-items-center">
                     <div className="PageHeader unselectable bg-dark rounded d-flex mt-2 mx-2 align-items-center" onClick={this.onHeaderClick}>
                         <div className="container px-0">
                             <div className="row w-100 align-self-center d-flex justify-content-between mx-0">
                                 <div className="col">
                                 </div>
-                                <div className="col-9 align-self-center">
+                                <div className="col-12 col-lg-11 col-xl-9 align-self-center">
                                     <div className="input-group my-3">
                                         <div className="input-group-prepend">
                                             <button className="btn wowBtn btn-outline-secondary searchBar" data-toggle="modal" data-target="#exampleModalLong" type="button">

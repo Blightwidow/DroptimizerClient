@@ -48,17 +48,17 @@ class PlayerHeader extends Component {
                 baseDps = 1;
             }
             if(this.props.isPercent){
-                perc = (myPercent / this.props.boundaryH)*98.5;
+                perc = (myPercent / this.props.boundaryH)*98;
                 //console.log(perc)
                 if(isNaN(perc)){
-                    perc= 98.5;
+                    perc= 98;
                 }
             }
             else{
-                perc = (increaseDps / this.props.boundaryH)*98.5;
+                perc = (increaseDps / this.props.boundaryH)*98;
                 //console.log(perc)
                 if(isNaN(perc)){
-                    perc= 98.5;
+                    perc= 98;
                 }
 
             }
@@ -107,29 +107,28 @@ class PlayerHeader extends Component {
                 <div className="PlayerListItem rounded">
                     <div className="PlayerWrapper unselectable">  
                         <div className="PlayerHeader align-items-center row p-2">
-                            <div className="col-3 pr-0 align-self-center">
+                            <div className="col-7 col-md-4 pr-0 align-self-center order-first">
                                 <div className="row">
-                                    <h4 className={"PlayerRank text-center pt-1 ml-2 "+rankCls}>{this.props.value+1}</h4>
+                                    <h4 className={"PlayerRank text-center pt-1 pl-2 "+rankCls}>{this.props.value+1}</h4>
                                     <a className="armoryLink" href={"https://worldofwarcraft.com/en-us/character/"+this.props.player.realm+"/"+this.props.player.name } rel="noopener noreferrer" target="_blank">
-                                        <div className="row">
-                                            <div className="col d-flex align-middle align-items-center">
-                                                <img className="PlayerImage rounded mr-2 align-items-center " alt="" src={"https://render-"+this.props.player.region+".worldofwarcraft.com/character/"+this.props.player.thumbnail}/>
-                                                <h5 className={"PlayerName pt-1 " + cls}>{this.props.player.name}</h5>
-                                            </div>
+                                        <div className="row mx-0 p-0">
+                                            <img className="PlayerImage rounded mr-2 align-self-center " alt="" src={"https://render-"+this.props.player.region+".worldofwarcraft.com/character/"+this.props.player.thumbnail}/>
+                                            <h5 className={"PlayerName pt-1 " + cls}>{this.props.player.name}</h5>
                                         </div>
                                     </a>
-                                    <div className="col d-flex p-0 justify-content-center">
+                                    <div className="row mx-auto mx-0 p-0">
                                         <a onMouseEnter={this.raidbotsEnter} onMouseLeave={this.raidbotsLeave} className="d-flex align-items-center mx-2 mb-1" href={"https://raidbots.com/simbot/report/"+this.props.player.reportID} target="_blank">
                                             <img className="rbIco " src={'src/'+this.props.rbIco} alt="" height="30px" />
                                         </a>
-                                        { this.state.hideTooltip ? null : <RaidbotsTooltip player={this.props.player} key={1}/> } 
-
+                                        { this.state.hideTooltip ? null : <RaidbotsTooltip player={this.props.player} key={1}/> }
                                     </div>
 
                                 </div>
                             </div>
+                            <div class="w-100 d-md-none"></div>
                             
-                            <div className='col-4 pl-2 mx-4 ml-2 align-self-center'>
+                            <div class="col d-block d-md-none"></div>
+                            <div className='col-8 col-md-4 px-2 mx-4 ml-2 align-self-center'>
                                 <div className='row justify-content-between'>
                                     <h5 className={"PlayerSim pt-1 mx-1 text-muted "}>{baseDps.toFixed(0) + " dps"}</h5>
                                     <i className="fas fa-arrow-right text-muted pt-2"></i>
@@ -138,8 +137,9 @@ class PlayerHeader extends Component {
                                     
                                 </div>
                             </div>
+                            <div class="col d-block d-md-none"></div>
                             
-                            <div className="col-3 align-self-center p-0 mr-3" height="20px">
+                            <div className="col align-self-center d-none d-md-flex p-0 mr-3" height="20px">
                                 <svg className="graphSVG" width={"100%"}  height="12px">
                                     <rect className="svgLine1" width="100%" y="30%" height="2px" rx="2" ry="2"></rect>
                                     <rect className={"svgLine2 "+signCls} x={0} width={perc+"%"} y="27%" height="3px" rx="2" ry="2"></rect>
@@ -147,7 +147,12 @@ class PlayerHeader extends Component {
                                 </svg>
                             </div>
                             
-                            <div className="col-1 pr-0">
+                            <div className="col-1 pr-2 d-none d-md-block ">
+                                <div className="row justify-content-end ml-1 mr-1">
+                                    <h4 className={"percentText "+signCls}>{textBig}</h4>
+                                </div>
+                            </div>
+                            <div className="col-5 pr-2 d-block d-md-none order-first">
                                 <div className="row justify-content-end ml-1 mr-1">
                                     <h4 className={"percentText "+signCls}>{textBig}</h4>
                                 </div>

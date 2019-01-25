@@ -443,7 +443,7 @@ class App extends Component {
     render() {
         
         return (
-            <div className="container align-items-center">
+            <div className="container-fluid align-items-center">
                 <PageHeader bosses={this.state.bosses} players={this.state.players} setBossCollapse = {this.setBossCollapse} />
                 { this.state.bossCollapsed ? null : <BossWrapper bosses={this.state.bosses} players={this.state.players} /> }
             </div>

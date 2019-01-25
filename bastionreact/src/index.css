@@ -31,6 +31,14 @@ body {
   font-size: 1.3em;
 }
 
+.alertWrapper{
+  width: 80%;
+  z-index: 2000;
+  position: absolute;
+  left: 10%;
+  bottom: 2.6em;
+}
+
 /* width */
 .playerScroller::-webkit-scrollbar-track
 {
@@ -278,9 +286,52 @@ code {
   border-color: #333;
 }
 
+.container-fluid{
+  padding: 0px;
+}
+
 
 @media (min-width: 576px){
   .modal-dialog {
     max-width: 40em;
+    
   }
 }
+@media (min-width: 576px){
+  .container-fluid {
+    max-width: 4000px;
+    padding: 0px;
+  }
+  .rbTooltip{
+    display: none;
+  }
+}
+@media (min-width: 768px){
+  .container-fluid {
+    max-width: 4000px;
+    padding: 0px;
+  }
+  .rbTooltip{
+    display: none;
+  }
+}
+@media (min-width: 992px){
+  .container-fluid {
+    max-width: 960px;
+  }
+  .rbTooltip{
+    display: block;
+  }
+}
+
+@media (min-width: 1200px){
+  .container-fluid {
+    max-width: 1140px;
+  }
+}
+
+
+
+
+
+
