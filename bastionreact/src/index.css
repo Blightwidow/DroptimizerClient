@@ -128,17 +128,27 @@ body {
   padding: 0px;
 }
 .rbTooltip{
-  width: 300%;
+  width: 9em;
   position: absolute;
-  float: left;
-  left: 3em;
-  top: -0.15em;
-  z-index: 10;
+  top: -0.3em;
+  margin-left: 2.5em;
+  z-index: 4000;
+  border: 1px solid rgb(22,22,22);
+}
+.rbTooltip2{
+  width: 9em;
+  position: absolute;
+  top: -0.3em;
+  margin-left: 5.5em;
+  z-index: 4000;
   border: 1px solid rgb(22,22,22);
 }
 .rbttText{
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 500;
+}
+.rbttText2{
+  font-size: 0.8em;
 }
 .psImage{
   height: 48px;
@@ -270,10 +280,20 @@ code {
 .rbIco{
   height: 30px;
   filter: grayscale(100%) brightness(40%);
-  
 }
+
 .rbIco:hover{
   filter: grayscale(0%) brightness(80%);
+}
+.wowHeadIco{
+  filter: grayscale(100%) brightness(70%);
+}
+.wowHeadIco:hover{
+  filter: grayscale(0%) brightness(70%);
+}
+
+.roleIco{
+  filter: brightness(100%);
 }
 
 .PlayerModalImage{
@@ -289,12 +309,14 @@ code {
 .container-fluid{
   padding: 0px;
 }
+.psGuild{
+  text-transform: capitalize;
+}
 
 
 @media (min-width: 576px){
   .modal-dialog {
     max-width: 40em;
-    
   }
 }
 @media (min-width: 576px){
@@ -312,15 +334,12 @@ code {
     padding: 0px;
   }
   .rbTooltip{
-    display: none;
+    display: block;
   }
 }
 @media (min-width: 992px){
   .container-fluid {
     max-width: 960px;
-  }
-  .rbTooltip{
-    display: block;
   }
 }
 

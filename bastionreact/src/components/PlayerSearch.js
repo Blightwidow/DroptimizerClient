@@ -34,16 +34,16 @@ class PlayerSearch extends Component {
                     <div className="col">
                         <div className="row">
                             <div className="col d-flex p-0 align-self-center justify-content-end">
-                                <a className="d-flex align-items-center px-2 mb-1" href={"https://www.wowprogress.com/character/"+this.props.player.region+"/"+this.props.player.realm+"/"+this.props.player.name} target="_blank">
+                                <a className="d-flex align-items-center px-2 mb-1" rel="noopener noreferrer" href={"https://www.wowprogress.com/character/"+this.props.player.region+"/"+this.props.player.realm+"/"+this.props.player.name} target="_blank">
                                     <img className="wowprog rounded" src={'src/wowprog.png'} alt="" title="WoW Progress" height="30px" />
                                 </a>
-                                <a className="d-flex align-items-center px-2 mb-1" href={"https://www.warcraftlogs.com/character/"+this.props.player.region+"/"+this.props.player.realm+"/"+this.props.player.name} target="_blank">
+                                <a className="d-flex align-items-center px-2 mb-1" rel="noopener noreferrer" href={"https://www.warcraftlogs.com/character/"+this.props.player.region+"/"+this.props.player.realm+"/"+this.props.player.name} target="_blank">
                                     <img className="wclogs rounded" src={'src/wclogs.png'} alt="" title="Warcraft Logs" height="30px" />
                                 </a>
-                                <a className="d-flex align-items-center px-2 mb-1" href={"https://raider.io/characters/"+this.props.player.region+"/"+this.props.player.realm+"/"+this.props.player.name} target="_blank">
+                                <a className="d-flex align-items-center px-2 mb-1" rel="noopener noreferrer" href={"https://raider.io/characters/"+this.props.player.region+"/"+this.props.player.realm+"/"+this.props.player.name} target="_blank">
                                     <img className="raiderio rounded" src={'src/raiderio.png'} alt="" title="Raider.io" height="30px" />
                                 </a>
-                                <a className="d-flex align-items-center px-2 mb-1" href={"https://worldofwarcraft.com/en-us/character/"+this.props.player.realm+"/"+this.props.player.name} target="_blank">
+                                <a className="d-flex align-items-center px-2 mb-1" rel="noopener noreferrer" href={"https://worldofwarcraft.com/en-us/character/"+this.props.player.realm+"/"+this.props.player.name} target="_blank">
                                     <img className="armory rounded" src={'src/wowico.png'} alt="" title="Armory" height="30px" />
                                 </a>
                                 { this.state.hideTooltip ? null : <RaidbotsTooltip player={this.props.player} key={1}/> } 

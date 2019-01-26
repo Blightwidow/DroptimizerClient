@@ -7,13 +7,30 @@ class RaidbotsTooltip extends Component {
     }
 
     render() {
-        return (
-            <div className="rbTooltip rounded bg-dark">
-                <div className="d-flex col-auto m-2  justify-self-center ">
-                    <div className="row mx-auto text-light rbttText"><Moment fromNow>{this.props.player.lastModified}</Moment></div>              
+        if (this.props.rbots === false){
+            return (
+            <div className="rbTooltip2 rounded bg-dark">
+                <div className="d-flex col-auto m-1  justify-self-center ">
+                    <div className="mx-auto text-justify-center">
+                        <div className="row justify-content-center text-light rbttText2">Last Logout</div>
+                        <div className="row justify-content-center text-light rbttText"><Moment className="text-justify-center" fromNow>{this.props.player.lastModified}</Moment></div>
+                    </div>
                 </div>
             </div>
-        );
+            );
+        }
+        else{
+            return(
+                <div className="rbTooltip rounded bg-dark">
+                    <div className="d-flex col-auto m-1  justify-self-center ">
+                        <div className="mx-auto text-justify-center">
+                            <div className="row justify-content-center text-light rbttText2">Last Updated</div>
+                            <div className="row justify-content-center text-light rbttText"><p className="p-0">No Data</p></div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
     }
 }
 

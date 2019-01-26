@@ -25,28 +25,51 @@ class PageHeader extends Component {
 
     getItems = (term) =>{
         let out = [];
-        let playerList = [];
-        for (var i = 0; i < this.props.bosses.length; i++) {
-            for (var j = 0; j < this.props.bosses[i].loot.length; j++){
-                //console.log(this.props.bosses[i].loot[j].name);
-                let obj = JSON.stringify(this.props.bosses[i].loot[j].name);
-                if(obj !== null && typeof obj !== 'undefined'){
-                    obj = obj.toLowerCase();
-                    let sstring = (term.toLowerCase()).split(" ");
-                    let result = true;
-                    for (var k = 0; k < sstring.length; k++){
-                        if(sstring[k] !== ""){
-                            if(obj.includes(sstring[k]) === false){
-                                result = false;
-                            }
+        let userTerm = '';
+        if(term.length > 0){
+            userTerm = JSON.stringify(term);
+            userTerm = term.split(" ");
+        }
+        for (var i = 0; i < this.props.items.length; i++) {
+            let obj = this.props.items[i].searchTerms;
+            //console.log(this.props.items);
+            let searchTermMatches = [];
+            for(var j = 0; j < obj.length; j++){
+                let sTerm = obj[j];
+                sTerm = sTerm.toLowerCase();
+                if(j !== 0){ // if not name, check for full match
+                    for(var k = 0; k < userTerm.length; k++){
+                        if(userTerm[k] === sTerm){
+                            searchTermMatches.push(true);
                         }
                     }
-                    if(result === true && out.indexOf(this.props.bosses[i].loot[j] === -1)){
-                        out.push(this.props.bosses[i].loot[j]);
+                }
+                else{ // if name, check for partial match
+                    for(var l = 0; l < userTerm.length; l++){
+                        if(sTerm.includes(userTerm[l])){
+                            searchTermMatches.push(true);
+                        }
                     }
                 }
             }
+            let doReturn = true;
+            for(var m = 0; m < searchTermMatches.length; m++){
+                if(searchTermMatches[m] === false){
+                    doReturn = false;
+                }
+            }
+
+            // if not all conditions match, or none match, dont return item
+            if(searchTermMatches.length < userTerm.length || searchTermMatches.length === 0){ 
+                doReturn = false;
+            }
+            if(doReturn === true){
+                out.push(this.props.items[i]);
+            }
         }
+        
+        let playerList = [];
+
         for (var x = 0; x < this.props.players.length; x++){
             let obj = JSON.stringify(this.props.players[x].name)
             if(obj !== null && typeof obj !== 'undefined'){
@@ -169,7 +192,11 @@ class PageHeader extends Component {
         for (var i = 0; i < this.state.players.length; i++){
             playerSpawns.push(<PlayerSearch player={this.state.players[i]} key={i} />)
         }
-        
+        let loading = this.props.loading;
+        if(this.state.searchTerm === ''){
+            loading = false;
+        }
+
         return (
             
             <div>  
@@ -216,27 +243,27 @@ class PageHeader extends Component {
                             </div>
                             <div className="modal-footer">
                                     <div className="col-2 d-flex mx-auto justify-content-center align-self-center px-1">
-                                        <a href="https://discord.gg/vqdAkGR" title="Guild Discord" target="_blank">
+                                        <a href="https://discord.gg/vqdAkGR" title="Guild Discord" rel="noopener noreferrer" target="_blank">
                                             <img className="yeetGif" src="src/discord.png" alt="" height="32px" />
                                         </a>
                                     </div>
                                     <div className="col-2 d-flex mx-auto justify-content-center align-self-center px-1">
-                                        <a href="https://www.wowprogress.com/guild/us/frostmourne/Bastion" title="Guild WoW Progress" target="_blank">
+                                        <a href="https://www.wowprogress.com/guild/us/frostmourne/Bastion" title="Guild WoW Progress" rel="noopener noreferrer" target="_blank">
                                             <img className="yeetGif" src="src/wowprog.png" alt="" height="32px" />
                                         </a>
                                     </div>
                                     <div className="col-2 d-flex mx-auto justify-content-center align-self-center px-1">
-                                        <a href="https://www.warcraftlogs.com/guild/us/frostmourne/bastion" title="Guild Logs" target="_blank">
+                                        <a href="https://www.warcraftlogs.com/guild/us/frostmourne/bastion" title="Guild Logs" rel="noopener noreferrer" target="_blank">
                                             <img className="yeetGif" src="src/wclogs.png" alt="" height="32px" />
                                         </a>
                                     </div>
                                     <div className="col-2 d-flex mx-auto justify-content-center align-self-center px-1">
-                                        <a href="https://raider.io/guilds/us/frostmourne/Bastion" title="Guild Raider.io" target="_blank">
+                                        <a href="https://raider.io/guilds/us/frostmourne/Bastion" title="Guild Raider.io" rel="noopener noreferrer" target="_blank">
                                             <img className="yeetGif" src="src/raiderio.png" alt="" height="32px" />
                                         </a>
                                     </div>
                                     <div className="col-2 d-flex mx-auto justify-content-center align-self-center px-1">
-                                        <a href="https://www.youtube.com/playlist?list=PL6b8NnRTTfiT1XUdUuoXPYG1gWmMU_o2P" title="Guild Kill Videos" target="_blank">
+                                        <a href="https://www.youtube.com/playlist?list=PL6b8NnRTTfiT1XUdUuoXPYG1gWmMU_o2P" rel="noopener noreferrer" title="Guild Kill Videos" target="_blank">
                                             <img className="yeetGif" src="src/youtube.png" alt="" width="32px" />
                                         </a>
                                     </div>
@@ -272,6 +299,7 @@ class PageHeader extends Component {
                             </div>
                         </div>
                     </div>
+                    { loading ? <div className="col mt-3 d-flex align-content-center"><img className="mx-auto" src="src/spinner.svg" alt="" height="60px" /></div> : null }
                     { this.state.noLoot ? null : <LootList loot={this.state.items} players={this.props.players}/> }
                     { this.state.noPlayers ? null : playerSpawns }
 

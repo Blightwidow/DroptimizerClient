@@ -15,6 +15,7 @@ class PlayerList extends Component {
             hasPlayer : true,
             showFilter : false,
             filterClicked : false,
+            loadingPlayers : false,
             icons : ['rb1.png','rb2.png','rb3.png','rb4.png','rb5.png','rb6.png','rb7.png']
         }
     }
@@ -80,6 +81,7 @@ class PlayerList extends Component {
     
 
     componentDidMount = () => {
+        this.setState({loadingPlayers : true});
         let promises = [];
         let requests = [];
         for(let i = 0; i < this.props.players.length; i++){
@@ -102,7 +104,7 @@ class PlayerList extends Component {
                     this.setState({hasPlayer : false})
                 }
             }
-            this.sortMyArray();
+            this.setState({loadingPlayers : false});
         }));
     }
 
@@ -112,8 +114,10 @@ class PlayerList extends Component {
         let bHL = this.getBoundaries(upgrades);
         
         for (var i = 0; i < this.state.upgrades.length; i++) {
-            let rand = this.state.icons[Math.floor(Math.random()*this.state.icons.length)];
-            playerHeaders.push(<PlayerHeader player={upgrades[i]} isPercent={this.props.isPercent} boundaryH={bHL[0]} boundaryL={bHL[1]} key={i} value={i} item={this.props.item} rbIco={rand} noPlayers={false} />)
+            if(this.state.loadingPlayers == false){
+                let rand = this.state.icons[Math.floor(Math.random()*this.state.icons.length)];
+                playerHeaders.push(<PlayerHeader player={upgrades[i]} isPercent={this.props.isPercent} boundaryH={bHL[0]} boundaryL={bHL[1]} key={i} value={i} item={this.props.item} rbIco={rand} noPlayers={false} />)
+            }
         }
         if(playerHeaders.length === 0){
             playerHeaders.push(<PlayerHeader player={null} key={i} value={i} item={this.props.item} noPlayers={true} hasAnyone={this.state.hasPlayer}/>)

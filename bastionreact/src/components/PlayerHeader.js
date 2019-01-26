@@ -5,23 +5,42 @@ class PlayerHeader extends Component {
     constructor(props) {
         super();
         this.state = {
-            hideTooltip : true,
+            hideArmory : true,
+            hideRaidbots : true,
+            specs: {
+                "Protection Warrior":"Tank",
+                "Protection Paladin":"Tank",
+                "Holy Paladin":"Healer",
+                "Discipline Priest":"Healer",
+                "Holy Priest":"Healer",
+                "Blood Death Knight":"Tank",
+                "Restoration Shaman":"Healer",
+                "Brewmaster Monk":"Tank",
+                "Mistweaver Monk":"Healer",
+                "Guardian Druid":"Tank",
+                "Restoration Druid":"Healer",
+                "Vengeance Demon Hunter":"Tank",
+            }
         }
     }
 
     updateState = (response) =>{
         if(response.data !== ''){
             this.setState({upgrade : response.data})
-            //console.log(response.data);
         }
     }
 
     raidbotsEnter = () =>{
-        this.setState({hideTooltip : false});
+        this.setState({hideRaidbots : false});
     }
     raidbotsLeave = () =>{
-        this.setState({hideTooltip : true});
-        console.log("left");
+        this.setState({hideRaidbots : true});
+    }
+    armoryEnter = () =>{
+        this.setState({hideArmory : false});
+    }
+    armoryLeave = () =>{
+        this.setState({hideArmory : true});
     }
 
     render() {
@@ -103,6 +122,22 @@ class PlayerHeader extends Component {
                 textSmall = myPercent.toFixed(2)+"%";
             }
 
+            let roleIcon = "wowico.png";
+            if(this.props.player.spec !== null){
+                let specrole = this.state.specs[this.props.player.spec];
+                console.log(specrole);
+                if(specrole === "Tank"){
+                    roleIcon = "tankico.png";
+                }
+                if(specrole === "Healer"){
+                    roleIcon = "healerico.png";
+                }
+                if(typeof specrole === 'undefined'){
+                    console.log("DPS");
+                    roleIcon = "dpsico.png";
+                }
+            }
+
             return (
                 <div className="PlayerListItem rounded">
                     <div className="PlayerWrapper unselectable">  
@@ -113,31 +148,31 @@ class PlayerHeader extends Component {
                                     <a className="armoryLink" href={"https://worldofwarcraft.com/en-us/character/"+this.props.player.realm+"/"+this.props.player.name } rel="noopener noreferrer" target="_blank">
                                         <div className="row mx-0 p-0">
                                             <img className="PlayerImage rounded mr-2 align-self-center " alt="" src={"https://render-"+this.props.player.region+".worldofwarcraft.com/character/"+this.props.player.thumbnail}/>
-                                            <h5 className={"PlayerName pt-1 " + cls}>{this.props.player.name}</h5>
+                                            <h5 className={"PlayerName pt-2 " + cls}>{this.props.player.name}</h5>
                                         </div>
                                     </a>
                                     <div className="row mx-auto mx-0 p-0">
-                                        <a onMouseEnter={this.raidbotsEnter} onMouseLeave={this.raidbotsLeave} className="d-flex align-items-center mx-2 mb-1" href={"https://raidbots.com/simbot/report/"+this.props.player.reportID} target="_blank">
+                                        <a onMouseEnter={this.raidbotsEnter} onMouseLeave={this.raidbotsLeave} className="d-flex align-items-center mr-1 mb-1" rel="noopener noreferrer" href={"https://raidbots.com/simbot/report/"+this.props.player.reportID} target="_blank">
                                             <img className="rbIco " src={'src/'+this.props.rbIco} alt="" height="30px" />
                                         </a>
-                                        { this.state.hideTooltip ? null : <RaidbotsTooltip player={this.props.player} key={1}/> }
+                                        { this.state.hideRaidbots ? null : <RaidbotsTooltip player={this.props.player} rbots={true} key={1}/> }
+                                        <img onMouseEnter={this.armoryEnter} onMouseLeave={this.armoryLeave}  className="roleIco ml-3 align-self-center" src={'src/'+roleIcon} alt="" height="30px" />
+                                        { this.state.hideArmory ? null : <RaidbotsTooltip player={this.props.player} rbots={false} key={1}/> }
                                     </div>
-
                                 </div>
                             </div>
-                            <div class="w-100 d-md-none"></div>
+                            <div className="w-100 d-md-none"></div>
                             
-                            <div class="col d-block d-md-none"></div>
+                            <div className="col d-block d-md-none"></div>
                             <div className='col-8 col-md-4 px-2 mx-4 ml-2 align-self-center'>
                                 <div className='row justify-content-between'>
                                     <h5 className={"PlayerSim pt-1 mx-1 text-muted "}>{baseDps.toFixed(0) + " dps"}</h5>
                                     <i className="fas fa-arrow-right text-muted pt-2"></i>
                                     <h5 className={"PlayerSim pt-1 mx-1 text-muted "}>{upgradeMean.toFixed(0)+" dps"}</h5>
                                     <h5 className={"PlayerSim pt-1 mx-1 ml-2 "+signCls}>{textSmall}</h5>
-                                    
                                 </div>
                             </div>
-                            <div class="col d-block d-md-none"></div>
+                            <div className="col d-block d-md-none"></div>
                             
                             <div className="col align-self-center d-none d-md-flex p-0 mr-3" height="20px">
                                 <svg className="graphSVG" width={"100%"}  height="12px">
