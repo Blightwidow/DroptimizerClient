@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build && git checkout gh-pages && cd .. && echo 'loot.arwic.io' >> CNAME && git stage .  && git commit -m 'Adds CNAME' && git push origin gh-pages",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
