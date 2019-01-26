@@ -286,14 +286,19 @@ code {
   filter: grayscale(0%) brightness(80%);
 }
 .wowHeadIco{
-  filter: grayscale(100%) brightness(70%);
+  filter: grayscale(100%) brightness(50%);
+  opacity: 0.5;
 }
 .wowHeadIco:hover{
   filter: grayscale(0%) brightness(70%);
+  opacity: 1;
 }
 
 .roleIco{
-  filter: brightness(100%);
+  filter: grayscale(40%) brightness(80%);
+}
+.roleIco:hover{
+  filter: grayscale(0%) brightness(80%);
 }
 
 .PlayerModalImage{
