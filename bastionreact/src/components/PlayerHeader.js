@@ -155,7 +155,7 @@ class PlayerHeader extends Component {
                                         <a onMouseEnter={this.raidbotsEnter} onMouseLeave={this.raidbotsLeave} className="d-flex align-items-center mr-1 mb-1" rel="noopener noreferrer" href={"https://raidbots.com/simbot/report/"+this.props.player.reportID} target="_blank">
                                             <img className="rbIco " src={'src/'+this.props.rbIco} alt="" height="30px" />
                                         </a>
-                                        { this.state.hideRaidbots ? null : <RaidbotsTooltip player={this.props.player} rbots={true} key={1}/> }
+                                        { this.state.hideRaidbots ? null : <RaidbotsTooltip player={this.props.player} upgrade={this.props.upgrade} rbots={true} key={1}/> }
                                         <img onMouseEnter={this.armoryEnter} onMouseLeave={this.armoryLeave}  className="roleIco ml-3 align-self-center" src={'src/'+roleIcon} alt="" height="30px" />
                                         { this.state.hideArmory ? null : <RaidbotsTooltip player={this.props.player} rbots={false} key={1}/> }
                                     </div>
