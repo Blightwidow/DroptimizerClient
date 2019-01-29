@@ -28,6 +28,7 @@ class PageHeader extends Component {
         let userTerm = '';
         if(term.length > 0){
             userTerm = JSON.stringify(term);
+            userTerm = userTerm.toLowerCase();
             userTerm = term.split(" ");
         }
         for (var i = 0; i < this.props.items.length; i++) {

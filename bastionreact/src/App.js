@@ -106,11 +106,11 @@ class App extends Component {
                     'searchTerms': ["agility","trinket","dps","aoe","agi","damage"]
                 },
                 {
-                    'id': 165503,
+                    'id': 165764,
                     'searchTerms': ["cloth","gloves","hands","crit","haste"]
                 },
                 {
-                    'id': 165516,
+                    'id': 165777,
                     'searchTerms': ["leather","azerite","shoulders","shoulder"]
                 },
                 {
