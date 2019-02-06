@@ -31,7 +31,7 @@ class PageHeader extends Component {
             userTerm = term.toLowerCase();
             
             userTerm = userTerm.split(" ");
-            console.log(userTerm);
+            //console.log(userTerm);
 
         }
         for (var i = 0; i < this.props.items.length; i++) {

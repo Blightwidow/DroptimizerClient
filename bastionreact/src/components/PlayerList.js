@@ -27,8 +27,8 @@ class PlayerList extends Component {
             obj.sort((a,b) => {
                 if(this.props.isPercent){
                     //console.log("percent");
-                    let aPercent = (a.mean - a.base_dps_mean) / a.base_dps_mean * 100;
-                    let bPercent = (b.mean - b.base_dps_mean) / b.base_dps_mean * 100;
+                    let aPercent = (a.dps - a.baseDps) / a.baseDps * 100;
+                    let bPercent = (b.dps - b.baseDps) / b.baseDps * 100;
                     if(aPercent < bPercent){
                         return 1;
                     }
@@ -36,8 +36,8 @@ class PlayerList extends Component {
                 }
                 else{
                     //console.log('numbers');
-                    let aIncrease = a.mean - a.base_dps_mean;
-                    let bIncrease = b.mean - b.base_dps_mean;
+                    let aIncrease = a.dps - a.baseDps;
+                    let bIncrease = b.dps - b.baseDps;
                     if(aIncrease < bIncrease){
                         return 1;
                     }
@@ -53,8 +53,8 @@ class PlayerList extends Component {
         let bH = 0;
         let bL = 1000;
         for(let i = 0; i < upgrades.length; i++){
-            let base = upgrades[i].base_dps_mean;
-            let mean = upgrades[i].mean;
+            let base = upgrades[i].baseDps;
+            let mean = upgrades[i].dps;
             let increaseDps = mean - base;
             if(this.props.isPercent){
                 let percent = increaseDps / base * 100;
