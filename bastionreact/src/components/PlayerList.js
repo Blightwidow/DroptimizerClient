@@ -85,7 +85,7 @@ class PlayerList extends Component {
         let promises = [];
         let requests = [];
         for(let i = 0; i < this.props.players.length; i++){
-            let url = API_UPGRADE+this.props.players[i].region+'/'+this.props.players[i].realm+'/'+this.props.players[i].name+'/'+this.props.item.id;
+            let url = API_UPGRADE+this.props.players[i].name+'/'+this.props.item.id;
             requests.push(url);
         }
         for(let i = 0; i < requests.length; i++){

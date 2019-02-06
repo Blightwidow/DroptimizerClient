@@ -57,8 +57,8 @@ class PlayerHeader extends Component {
         }
         if(this.props.noPlayers === false){
             let cls = "class" + this.props.player.class;
-            let upgradeMean = this.props.player.mean;
-            let baseDps = this.props.player.base_dps_mean;
+            let upgradeMean = this.props.player.dps;
+            let baseDps = this.props.player.baseDps;
             let increaseDps = upgradeMean - baseDps;
             let myPercent = increaseDps / baseDps * 100;
             let perc = 0;
