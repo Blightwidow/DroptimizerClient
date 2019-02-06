@@ -9,7 +9,7 @@ class PlayerModal extends Component {
         let cls = "class" + this.props.player.class;
         return (
             <div className="PlayerModalWrapper align-items-center">
-                <a className="armoryLink" href={"https://worldofwarcraft.com/en-us/character/"+this.props.player.realm+"/"+this.props.player.name } rel="noopener noreferrer" target="_blank">
+                <a className="armoryLink" href={"https://worldofwarcraft.com/en-us/character/frostmourne/"+this.props.player.name } rel="noopener noreferrer" target="_blank">
                 
                 <div className="LootHeader p-1 unselectable bg-dark rounded d-flex align-items-center" onClick={this.onHeaderClick}>
                     <div className="col-3 align-self-center">
