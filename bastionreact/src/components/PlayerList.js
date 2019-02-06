@@ -114,7 +114,7 @@ class PlayerList extends Component {
         let bHL = this.getBoundaries(upgrades);
         
         for (var i = 0; i < this.state.upgrades.length; i++) {
-            if(this.state.loadingPlayers == false){
+            if(this.state.loadingPlayers === false){
                 let rand = this.state.icons[Math.floor(Math.random()*this.state.icons.length)];
                 playerHeaders.push(<PlayerHeader player={upgrades[i]} isPercent={this.props.isPercent} boundaryH={bHL[0]} boundaryL={bHL[1]} key={i} value={i} item={this.props.item} rbIco={rand} noPlayers={false} />)
             }

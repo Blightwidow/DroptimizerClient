@@ -27,9 +27,12 @@ class PageHeader extends Component {
         let out = [];
         let userTerm = '';
         if(term.length > 0){
-            userTerm = JSON.stringify(term);
-            userTerm = userTerm.toLowerCase();
-            userTerm = term.split(" ");
+            
+            userTerm = term.toLowerCase();
+            
+            userTerm = userTerm.split(" ");
+            console.log(userTerm);
+
         }
         for (var i = 0; i < this.props.items.length; i++) {
             let obj = this.props.items[i].searchTerms;
@@ -40,7 +43,7 @@ class PageHeader extends Component {
                 sTerm = sTerm.toLowerCase();
                 if(j !== 0){ // if not name, check for full match
                     for(var k = 0; k < userTerm.length; k++){
-                        if(userTerm[k] === sTerm){
+                        if(userTerm[k].toLowerCase() === sTerm.toLowerCase()){
                             searchTermMatches.push(true);
                         }
                     }
