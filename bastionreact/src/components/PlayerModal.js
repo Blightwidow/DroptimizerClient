@@ -16,7 +16,7 @@ class PlayerModal extends Component {
                         <div className="row">
                             <div className="row">
                                 <div className="col d-flex align-middle align-items-center">
-                                    <img className="PlayerModalImage rounded mr-2 align-items-center " alt="" src={"https://render-"+this.props.player.region+".worldofwarcraft.com/character/"+this.props.player.thumbnail}/>
+                                    <img className="PlayerModalImage rounded mr-2 align-items-center " alt="" src={"https://render-us.worldofwarcraft.com/character/"+this.props.player.thumbnail}/>
                                     <h5 className={"PlayerName pt-1 " + cls}>{this.props.player.name}</h5>
                                 </div>
                             </div>
