@@ -147,7 +147,7 @@ class PlayerHeader extends Component {
                                     <h4 className={"PlayerRank text-center pt-1 pl-2 "+rankCls}>{this.props.value+1}</h4>
                                     <a className="armoryLink" href={"https://worldofwarcraft.com/en-us/character/"+this.props.player.realm+"/"+this.props.player.name } rel="noopener noreferrer" target="_blank">
                                         <div className="row mx-0 p-0">
-                                            <img className="PlayerImage rounded mr-2 align-self-center " alt="" src={"https://render-"+this.props.player.region+".worldofwarcraft.com/character/"+this.props.player.thumbnail}/>
+                                            <img className="PlayerImage rounded mr-2 align-self-center " alt="" src={"https://render-us.worldofwarcraft.com/character/"+this.props.player.thumbnail}/>
                                             <h5 className={"PlayerName pt-2 " + cls}>{this.props.player.name}</h5>
                                         </div>
                                     </a>
