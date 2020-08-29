@@ -3,8 +3,8 @@ import BossWrapper from './components/BossWrapper';
 import PageHeader from './components/PageHeader';
 import axios from 'axios'
 
-const API_CHARACTER = 'https://api.arwic.io/droptimizer/1/character';
-const API_ITEM = 'https://api.arwic.io/droptimizer/1/item/'
+const API_CHARACTER = 'https://api.loot.arwic.io/droptimizer/1/character';
+const API_ITEM = 'https://api.loot.arwic.io/droptimizer/1/item/'
 
 class App extends Component {
 
