@@ -4,7 +4,7 @@ import PlayerModal from './PlayerModal';
 import PlayerSearch from './PlayerSearch';
 import axios from 'axios';
 
-const API_UPDATE = "https://api.arwic.io/droptimizer/1/update/report/";
+const API_UPDATE = "https://api.loot.arwic.io/1/update/report/";
 
 class PageHeader extends Component {
     constructor(props) {

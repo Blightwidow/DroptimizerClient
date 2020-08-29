@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PlayerHeader from './PlayerHeader';
 import axios from 'axios';
 
-const API_UPGRADE = 'https://api.arwic.io/droptimizer/1/upgrade/';
+const API_UPGRADE = 'https://api.loot.arwic.io/1/upgrade/';
 
 class PlayerList extends Component {
 
