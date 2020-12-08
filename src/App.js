@@ -9,63 +9,26 @@ class App extends Component {
   state = {
     players: [],
     bossCollapsed: false,
-  };
-  bosses = BOSSES;
-  items = [];
-  loading = true;
-
-  updateItemState = () => {
-    let promises = [];
-    let requests = [];
-    for (let i = 0; i < this.bosses.length; i++) {
-      for (var j = 0; j < this.bosses[i].loot.length; j++) {
-        let url = `${API_DOMAIN}/1/item/${this.bosses[i].loot[j].id}`;
-        requests.push(url);
-      }
-    }
-    for (let i = 0; i < requests.length; i++) {
-      promises.push(axios.get(requests[i], { crossdomain: true }));
-    }
-    axios.all(promises).then(
-      axios.spread((...args) => {
-        this.items = [];
-        for (let i = 0; i < args.length; i++) {
-          if (args[i].data !== '') {
-            for (let m = 0; m < this.bosses.length; m++) {
-              let bItems = this.bosses[m].loot;
-              let out = {};
-              for (let k = 0; k < bItems.length; k++) {
-                if (bItems[k].id === args[i].data.id) {
-                  let terms = [];
-                  terms.push(args[i].data.name);
-
-                  let result = args[i].data;
-                  if (typeof bItems[k].searchTerms !== 'undefined') {
-                    for (let n = 0; n < bItems[k].searchTerms.length; n++) {
-                      terms.push(bItems[k].searchTerms[n]);
-                    }
-                  }
-                  result.searchTerms = terms;
-                  out = result;
-                }
-              }
-              if (Object.keys(out).length > 0) {
-                this.items.push(out);
-              }
-            }
-          } else {
-          }
-        }
-        this.loading = false;
-      })
-    );
+    loading: true,
+    items: [],
   };
 
-  componentDidMount() {
-    this.updateItemState();
-    axios
-      .get(`${API_DOMAIN}/1/character`, { crossdomain: true })
-      .then((response) => this.setState({ players: response.data }));
+  async componentDidMount() {
+    const { data: players } = await axios.get(`${API_DOMAIN}/1/character`);
+    const itemIds = BOSSES.map((boss) => boss.loot)
+      .reduce((acc, loots) => [...acc, ...loots], [])
+      .map((loot) => loot.id)
+      .filter((lootId, index, self) => self.indexOf(lootId) === index);
+
+    const items = await Promise.all(
+      itemIds.map((id) => axios.get(`${API_DOMAIN}/1/item/${id}`))
+    ).then((responses) => responses.map((response) => response.data));
+
+    this.setState({
+      players,
+      items,
+      loading: false,
+    });
   }
 
   setBossCollapse = (boo) => {
@@ -73,23 +36,31 @@ class App extends Component {
   };
 
   render() {
+    const { items, players, loading } = this.state;
+
+    if (loading) {
+      return (
+        <div className="PlayerHeader d-flex justify-content-center align-items-center py-2">
+          <img src="src/spinner.svg" alt="" height="40px" />
+        </div>
+      );
+    }
+
     return (
       <div className="container-fluid align-items-center">
         <PageHeader
-          loading={this.loading}
-          bosses={this.bosses}
-          items={this.items}
-          players={this.state.players}
-          update={this.updateItemState}
+          loading={loading}
+          bosses={BOSSES}
+          items={items}
+          players={players}
           setBossCollapse={this.setBossCollapse}
         />
         {this.state.bossCollapsed ? null : (
           <BossWrapper
-            loading={this.loading}
-            bosses={this.bosses}
-            items={this.items}
-            update={this.updateItemState}
-            players={this.state.players}
+            loading={loading}
+            bosses={BOSSES}
+            items={items}
+            players={players}
           />
         )}
       </div>
