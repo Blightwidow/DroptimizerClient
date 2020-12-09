@@ -26,14 +26,12 @@ class PlayerList extends Component {
       var obj = [...this.state.upgrades];
       obj.sort((a, b) => {
         if (this.props.isPercent) {
-          //console.log("percent");
           let aPercent = ((a.dps - a.baseDps) / a.baseDps) * 100;
           let bPercent = ((b.dps - b.baseDps) / b.baseDps) * 100;
           if (aPercent < bPercent) {
             return 1;
           } else return -1;
         } else {
-          //console.log('numbers');
           let aIncrease = a.dps - a.baseDps;
           let bIncrease = b.dps - b.baseDps;
           if (aIncrease < bIncrease) {
@@ -89,8 +87,6 @@ class PlayerList extends Component {
             var newUpgrades = this.state.upgrades.slice();
             newUpgrades.push(args[i].data);
             this.setState({ upgrades: newUpgrades });
-            //console.log(args[i].data);
-            this.props.filter(false);
           } else {
             this.setState({ hasPlayer: false });
           }

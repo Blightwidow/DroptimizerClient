@@ -68,13 +68,11 @@ class PlayerHeader extends Component {
       }
       if (this.props.isPercent) {
         perc = (myPercent / this.props.boundaryH) * 98;
-        //console.log(perc)
         if (isNaN(perc)) {
           perc = 98;
         }
       } else {
         perc = (increaseDps / this.props.boundaryH) * 98;
-        //console.log(perc)
         if (isNaN(perc)) {
           perc = 98;
         }
@@ -121,7 +119,6 @@ class PlayerHeader extends Component {
       let roleIcon = 'wowico.png';
       if (this.props.player.spec !== null) {
         let specrole = this.state.specs[this.props.player.spec];
-        console.log(specrole);
         if (specrole === 'Tank') {
           roleIcon = 'tankico.png';
         }
@@ -129,7 +126,6 @@ class PlayerHeader extends Component {
           roleIcon = 'healerico.png';
         }
         if (typeof specrole === 'undefined') {
-          console.log('DPS');
           roleIcon = 'dpsico.png';
         }
       }

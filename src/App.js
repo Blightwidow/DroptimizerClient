@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
-import BossWrapper from './components/BossWrapper';
-import PageHeader from './components/PageHeader';
 import { API_DOMAIN, BOSSES } from './config';
+import { DataContext } from './hooks';
+import BossHeader from './components/BossHeader';
+import PageHeader from './components/PageHeader';
 
-class App extends Component {
-  state = {
-    players: [],
-    bossCollapsed: false,
-    loading: true,
-    items: [],
-  };
+const App = () => {
+  const [data, setData] = React.useState(null);
 
-  async componentDidMount() {
+  const fetchData = async () => {
     const { data: players } = await axios.get(`${API_DOMAIN}/1/character`);
     const itemIds = BOSSES.map((boss) => boss.loot)
       .reduce((acc, loots) => [...acc, ...loots], [])
@@ -24,48 +20,42 @@ class App extends Component {
       itemIds.map((id) => axios.get(`${API_DOMAIN}/1/item/${id}`))
     ).then((responses) => responses.map((response) => response.data));
 
-    this.setState({
+    setData({
       players,
       items,
-      loading: false,
     });
-  }
-
-  setBossCollapse = (boo) => {
-    this.setState({ bossCollapsed: boo });
   };
 
-  render() {
-    const { items, players, loading } = this.state;
+  React.useEffect(() => {
+    fetchData();
+  }, []);
 
-    if (loading) {
-      return (
-        <div className="PlayerHeader d-flex justify-content-center align-items-center py-2">
-          <img src="src/spinner.svg" alt="" height="40px" />
-        </div>
-      );
-    }
-
+  if (!data) {
     return (
-      <div className="container-fluid align-items-center">
-        <PageHeader
-          loading={loading}
-          bosses={BOSSES}
-          items={items}
-          players={players}
-          setBossCollapse={this.setBossCollapse}
-        />
-        {this.state.bossCollapsed ? null : (
-          <BossWrapper
-            loading={loading}
-            bosses={BOSSES}
-            items={items}
-            players={players}
-          />
-        )}
+      <div className="PlayerHeader d-flex justify-content-center align-items-center py-2">
+        <img src="src/spinner.svg" alt="" height="40px" />
       </div>
     );
   }
-}
+
+  return (
+    <DataContext.Provider value={data}>
+      <div className="container-fluid align-items-center">
+        <PageHeader bosses={BOSSES} />
+        <div className="BossWrapper align-items-center">
+          {BOSSES.map((boss) => (
+            <BossHeader
+              boss={boss}
+              items={data.items.filter((item) =>
+                boss.loot.find((bossItem) => bossItem.id === item.id)
+              )}
+              key={boss.name}
+            />
+          ))}
+        </div>
+      </div>
+    </DataContext.Provider>
+  );
+};
 
 export default App;

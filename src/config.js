@@ -1,4 +1,6 @@
 export const API_DOMAIN = 'http://localhost:3000';
+export const GUILD_REALM = 'twisting-nether';
+export const GUILD_REGION = 'eu';
 export const BOSSES = [
   {
     name: 'Shriekwing',
@@ -239,7 +241,7 @@ export const BOSSES = [
     image: 'src/Boss_icon_Sludgefist.png',
     loot: [
       {
-        id: 18299,
+        id: 182999,
         searchTerms: ['plate', 'chest', 'crit', 'vers'],
       },
       {
