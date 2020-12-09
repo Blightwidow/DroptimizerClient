@@ -1,142 +1,79 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 import PlayerHeader from './PlayerHeader';
 import { API_DOMAIN } from '../config';
+import { usePlayers } from '../hooks';
 
-const API_UPGRADE = `${API_DOMAIN}/1/upgrade/`;
+const PlayerList = ({ item }) => {
+  const players = usePlayers();
+  const [upgrades, setUpgrades] = React.useState(null);
 
-class PlayerList extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      upgrades: [],
-      boundaryH: 0,
-      boundaryL: 100,
-      hasPlayer: true,
-      showFilter: false,
-      filterClicked: false,
-      loadingPlayers: false,
-      icons: ['rb1.png', 'rb2.png', 'rb3.png', 'rb4.png', 'rb5.png', 'rb6.png', 'rb7.png'],
-    };
-  }
-
-  sortMyArray = () => {
-    if (this.state.upgrades !== []) {
-      var obj = [...this.state.upgrades];
-      obj.sort((a, b) => {
-        if (this.props.isPercent) {
-          let aPercent = ((a.dps - a.baseDps) / a.baseDps) * 100;
-          let bPercent = ((b.dps - b.baseDps) / b.baseDps) * 100;
-          if (aPercent < bPercent) {
-            return 1;
-          } else return -1;
-        } else {
-          let aIncrease = a.dps - a.baseDps;
-          let bIncrease = b.dps - b.baseDps;
-          if (aIncrease < bIncrease) {
-            return 1;
-          } else return -1;
-        }
-      });
-      return obj;
-    }
-  };
-  getBoundaries = (upgrades) => {
-    let bH = 0;
-    let bL = 1000;
-    for (let i = 0; i < upgrades.length; i++) {
-      let base = upgrades[i].baseDps;
-      let mean = upgrades[i].dps;
-      let increaseDps = mean - base;
-      if (this.props.isPercent) {
-        let percent = (increaseDps / base) * 100;
-        if (percent > bH) {
-          bH = percent;
-        }
-        if (percent < bL) {
-          bL = percent;
-        }
-      } else {
-        if (increaseDps > bH) {
-          bH = increaseDps;
-        }
-        if (increaseDps < bL) {
-          bL = increaseDps;
-        }
-      }
-    }
-    return [bH, bL];
-  };
-
-  componentDidMount = () => {
-    this.setState({ loadingPlayers: true });
-    let promises = [];
-    let requests = [];
-    for (let i = 0; i < this.props.players.length; i++) {
-      let url = API_UPGRADE + this.props.players[i].name + '/' + this.props.item.id;
-      requests.push(url);
-    }
-    for (let i = 0; i < requests.length; i++) {
-      promises.push(axios.get(requests[i], { crossdomain: true }));
-    }
-    axios.all(promises).then(
-      axios.spread((...args) => {
-        for (let i = 0; i < args.length; i++) {
-          if (args[i].data !== '') {
-            var newUpgrades = this.state.upgrades.slice();
-            newUpgrades.push(args[i].data);
-            this.setState({ upgrades: newUpgrades });
-          } else {
-            this.setState({ hasPlayer: false });
-          }
-        }
-        this.setState({ loadingPlayers: false });
-      })
+  const fetchData = async () => {
+    const upgrades = await Promise.all(
+      players.map((player) => axios.get(`${API_DOMAIN}/1/upgrade/${player.name}/${item.id}`))
+    ).then((responses) =>
+      responses.map((response) => response.data).filter((upgrade) => !!upgrade)
     );
+    setUpgrades(upgrades.sort((a, b) => b.dps - b.baseDps - (a.dps - a.baseDps)));
   };
 
-  render() {
-    let playerHeaders = [];
-    let upgrades = this.sortMyArray();
-    let bHL = this.getBoundaries(upgrades);
+  const maxIncrease = React.useMemo(() => {
+    if (!upgrades) {
+      return null;
+    }
 
-    for (var i = 0; i < this.state.upgrades.length; i++) {
-      if (this.state.loadingPlayers === false) {
-        let rand = this.state.icons[Math.floor(Math.random() * this.state.icons.length)];
-        playerHeaders.push(
-          <PlayerHeader
-            player={upgrades[i]}
-            isPercent={this.props.isPercent}
-            boundaryH={bHL[0]}
-            boundaryL={bHL[1]}
-            key={i}
-            value={i}
-            item={this.props.item}
-            rbIco={rand}
-            noPlayers={false}
-          />
-        );
-      }
-    }
-    if (playerHeaders.length === 0) {
-      playerHeaders.push(
-        <PlayerHeader
-          player={null}
-          key={i}
-          value={i}
-          item={this.props.item}
-          noPlayers={true}
-          hasAnyone={this.state.hasPlayer}
-        />
-      );
-    }
+    return upgrades.reduce(
+      (acc, upgrade) => Math.max(acc, upgrade.dps - upgrade.baseDps),
+      -Infinity
+    );
+  }, [upgrades]);
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (!upgrades) {
     return (
       <div className="col-12 playerScroller rounded">
-        <div className="PlayerList rounded-bottom m-auto">{playerHeaders}</div>
+        <div className="PlayerList rounded-bottom m-auto">
+          <div className="PlayerListItem">
+            <div className="PlayerWrapper pr-auto">
+              <div className="PlayerHeader d-flex justify-content-center align-items-center py-2">
+                <img src="src/spinner.svg" alt="" height="40px" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
-}
+
+  return (
+    <div className="col-12 playerScroller rounded">
+      <div className="PlayerList rounded-bottom m-auto">
+        {upgrades.length > 0 ? (
+          upgrades.map((upgrade, index) => (
+            <PlayerHeader
+              player={upgrade}
+              maxIncrease={maxIncrease}
+              key={upgrade.name}
+              item={item}
+              rank={index + 1}
+            />
+          ))
+        ) : (
+          <div className="PlayerListItem">
+            <div className="PlayerWrapper pr-auto">
+              <div className="PlayerHeader d-flex justify-content-center align-items-center py-2">
+                <h5 className="pl-3 pt-2 mx-2 text-muted">No Upgrades found</h5>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default PlayerList;

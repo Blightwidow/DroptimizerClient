@@ -1,20 +1,9 @@
 import React from 'react';
-import { usePlayers } from '../hooks';
 
 import PlayerList from './PlayerList';
 
 const LootHeader = ({ item }) => {
   const [expanded, setExpanded] = React.useState(false);
-  const [isPercent, setIsPercent] = React.useState(true);
-  const players = usePlayers();
-
-  const toggleIsPercent = React.useCallback(
-    (event) => {
-      event.stopPropagation();
-      setIsPercent(!isPercent);
-    },
-    [isPercent]
-  );
 
   return (
     <div
@@ -51,17 +40,9 @@ const LootHeader = ({ item }) => {
               </a>
             </div>
           </div>
-          {expanded && (
-            <button
-              className="btn filterBtn ml-auto mx-2 btn-secondary justify-self-end p-1 text-muted"
-              onClick={toggleIsPercent}
-            >
-              <i className="fas fa-filter"></i>
-            </button>
-          )}
         </div>
       </div>
-      {expanded && <PlayerList item={item} players={players} isPercent={isPercent} />}
+      {expanded && <PlayerList item={item} />}
     </div>
   );
 };
