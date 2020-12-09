@@ -1,4 +1,4 @@
-export const API_DOMAIN = 'http://localhost:3000';
+export const API_DOMAIN = 'http://174.138.4.29:3100/';
 export const GUILD_REALM = 'twisting-nether';
 export const GUILD_REGION = 'eu';
 export const BOSSES = [
