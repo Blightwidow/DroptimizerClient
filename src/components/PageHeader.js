@@ -62,7 +62,7 @@ const PageHeader = () => {
               </div>
               <div className="row d-flex">
                 <div className="input-group w-75 px-3 mx-auto my-2">
-                  <div className="input-group-prepend">
+                  <div className="input-group-prepend px-2">
                     <img className="wowIco" src="src/rb3.png" alt="" />
                   </div>
                   <input
