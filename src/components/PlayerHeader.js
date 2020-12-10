@@ -18,22 +18,7 @@ const SPECS = {
   'Vengeance Demon Hunter': 'Tank',
 };
 
-const PlayerHeader = ({ rank, item, maxIncrease, player }) => {
-  // constructor(props) {
-  //   super();
-  //   this.state = {
-  //     hideArmory: true,
-  //     hideRaidbots: true,
-  //     specs:
-  //   };
-  // }
-  // armoryEnter = () => {
-  //   this.setState({ hideArmory: false });
-  // };
-  // armoryLeave = () => {
-  //   this.setState({ hideArmory: true });
-  // };
-
+const PlayerHeader = ({ rank, maxIncrease, player }) => {
   const roleIcon = React.useMemo(() => {
     if (!player.spec) {
       return 'wowico';
@@ -105,12 +90,16 @@ const PlayerHeader = ({ rank, item, maxIncrease, player }) => {
                   />
                   <Tooltip>
                     <div className="row justify-content-center text-light rbttText2">
-                      Last Logout
+                      Last Simc Update
                     </div>
                     <div className="row justify-content-center text-light rbttText">
-                      <Moment className="text-justify-center" fromNow>
-                        {player.lastModified}
-                      </Moment>
+                      {player.simcLastModified ? (
+                        <Moment className="text-justify-center" fromNow>
+                          {player.simcLastModified}
+                        </Moment>
+                      ) : (
+                        'No simc yet'
+                      )}
                     </div>
                   </Tooltip>
                 </div>
