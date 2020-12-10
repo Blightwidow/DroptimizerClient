@@ -11,11 +11,17 @@ const PageHeader = () => {
   const items = useItems();
   const [searchInput, setSearchInput] = useState('');
   const [reportInput, setReportInput] = useState('');
+  const [simcInput, setsimcInput] = useState('');
 
   const submitReport = React.useCallback(() => {
     axios.get(`${API_DOMAIN}/1/update/report/${reportInput}`);
     setReportInput('');
   }, [reportInput]);
+
+  const submitSimC = React.useCallback(() => {
+    axios.post(`${API_DOMAIN}/1/update/simc`, { text: simcInput });
+    setsimcInput('');
+  }, [simcInput]);
 
   const searchedItems = React.useMemo(() => {
     if (!searchInput) {
@@ -51,14 +57,32 @@ const PageHeader = () => {
               </button>
             </div>
             <div className="modal-body">
-              <div className="row d-flex flex-wrap">
-                {players
-                  .sort((a, b) => a.name - b.name)
-                  .map((player) => (
-                    <div className="col-6 pb-1 px-2" key={player.name}>
-                      <PlayerModal player={player} />
-                    </div>
-                  ))}
+              <div className="row d-flex">
+                <div className="input-group w-75 px-3 mx-auto my-2">
+                  <div className="input-group-prepend px-2">
+                    <img className="wowIco" src="src/rb3.png" alt="" />
+                  </div>
+                  <textarea
+                    type="text"
+                    className="form-control searchBar text-light"
+                    placeholder="Paste simC"
+                    aria-label="simC"
+                    value={simcInput}
+                    onChange={(event) => setsimcInput(event.target.value)}
+                  />
+                  <div className="input-group-append">
+                    <button
+                      className="btn btn-outline-secondary searchBar"
+                      onClick={submitSimC}
+                      type="button"
+                    >
+                      <i className="fas fa-sync-alt searchIcon"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="row d-flex">
+                <h5 className="mx-auto">OR</h5>
               </div>
               <div className="row d-flex">
                 <div className="input-group w-75 px-3 mx-auto my-2">
@@ -83,6 +107,15 @@ const PageHeader = () => {
                     </button>
                   </div>
                 </div>
+              </div>
+              <div className="row d-flex flex-wrap">
+                {players
+                  .sort((a, b) => a.name - b.name)
+                  .map((player) => (
+                    <div className="col-6 pb-1 px-2" key={player.name}>
+                      <PlayerModal player={player} />
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
