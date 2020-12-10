@@ -28,7 +28,7 @@ const PageHeader = () => {
       return [];
     }
 
-    return items.filter((item) => item.name.match(searchInput));
+    return items.filter((item) => item.name.toLowerCase().includes(searchInput.toLowerCase()));
   }, [searchInput]);
 
   return (
