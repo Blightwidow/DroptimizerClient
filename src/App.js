@@ -11,18 +11,23 @@ const App = () => {
 
   const fetchData = async () => {
     const { data: players } = await axios.get(`${API_DOMAIN}/1/character`);
-    const itemIds = BOSSES.map((boss) => boss.loot)
+    const boosItems = BOSSES.map((boss) => boss.loot)
       .reduce((acc, loots) => [...acc, ...loots], [])
-      .map((loot) => loot.id)
+      .map((loot) => loot)
       .filter((lootId, index, self) => self.indexOf(lootId) === index);
 
     const items = await Promise.all(
-      itemIds.map((id) => axios.get(`${API_DOMAIN}/1/item/${id}`))
+      boosItems.map((item) => axios.get(`${API_DOMAIN}/1/item/${item.id}`))
     ).then((responses) => responses.map((response) => response.data));
+
+    const itemsWithTerms = items.map((item, index) => ({
+      ...item,
+      terms: boosItems[index].searchTerms.map(term => term.toLowerCase()),
+    }));
 
     setData({
       players,
-      items,
+      items: itemsWithTerms,
     });
   };
 

@@ -1,14 +1,18 @@
 import React from 'react';
-import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import { API_DOMAIN, GUILD_REALM, GUILD_REGION } from '../config';
+import { useLazyApi } from '../hooks';
 
 const PlayerModal = ({ player }) => {
+  const { isAuthenticated } = useAuth0();
+  const [deleteUser] = useLazyApi(`${API_DOMAIN}/1/character/${player.name}`, { method: 'DELETE' });
+
   const deleteCharacter = React.useCallback(
     async (event) => {
       event.stopPropagation();
       event.preventDefault();
-      await axios.delete(`${API_DOMAIN}/1/character/${player.name}`);
+      await deleteUser();
       window.location.reload();
     },
     [player]
@@ -31,13 +35,15 @@ const PlayerModal = ({ player }) => {
                     ?alt=/shadow/avatar/2-1.jpg`}
             />
             <h5 className={`PlayerName pt-1 class${player.class}`}>{player.name}</h5>
-            <button
-              className="btn btn-outline-secondary searchBar ml-auto"
-              onClick={deleteCharacter}
-              type="button"
-            >
-              <i className="fas fa-times searchIcon"></i>
-            </button>
+            {isAuthenticated && (
+              <button
+                className="btn btn-outline-secondary searchBar ml-auto"
+                onClick={deleteCharacter}
+                type="button"
+              >
+                <i className="fas fa-times searchIcon"></i>
+              </button>
+            )}
           </div>
         </div>
       </a>

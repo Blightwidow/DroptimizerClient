@@ -1,25 +1,34 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import LootList from './LootList';
 import PlayerModal from './PlayerModal';
 import { API_DOMAIN } from '../config';
-import { usePlayers, useItems } from '../hooks';
+import { useLazyApi, usePlayers, useItems } from '../hooks';
 
 const PageHeader = () => {
   const players = usePlayers();
   const items = useItems();
-  const [searchInput, setSearchInput] = useState('');
-  const [reportInput, setReportInput] = useState('');
-  const [simcInput, setsimcInput] = useState('');
+  const [searchInput, setSearchInput] = React.useState('');
+  const [reportInput, setReportInput] = React.useState('');
+  const [simcInput, setsimcInput] = React.useState('');
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const [submitReportID] = useLazyApi(`${API_DOMAIN}/1/update/report`, {
+    method: 'POST',
+    body: JSON.stringify({ reportId: reportInput }),
+  });
+  const [submitSimc] = useLazyApi(`${API_DOMAIN}/1/update/simc`, {
+    method: 'POST',
+    body: JSON.stringify({ text: simcInput }),
+  });
 
   const submitReport = React.useCallback(() => {
-    axios.get(`${API_DOMAIN}/1/update/report/${reportInput}`);
+    submitReportID();
     setReportInput('');
   }, [reportInput]);
 
   const submitSimC = React.useCallback(() => {
-    axios.post(`${API_DOMAIN}/1/update/simc`, { text: simcInput });
+    submitSimc();
     setsimcInput('');
   }, [simcInput]);
 
@@ -28,7 +37,19 @@ const PageHeader = () => {
       return [];
     }
 
-    return items.filter((item) => item.name.toLowerCase().includes(searchInput.toLowerCase()));
+    return items
+      .filter(
+        (item) =>
+          item.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+          item.terms.includes(searchInput.toLowerCase())
+      )
+      .reduce((acc, item) => {
+        if (acc.find((el) => el.id === item.id)) {
+          return acc;
+        }
+
+        return [...acc, item];
+      }, []);
   }, [searchInput]);
 
   return (
@@ -57,57 +78,61 @@ const PageHeader = () => {
               </button>
             </div>
             <div className="modal-body">
-              <div className="row d-flex">
-                <div className="input-group w-75 px-3 mx-auto my-2">
-                  <div className="input-group-prepend px-2">
-                    <img className="wowIco" src="src/rb3.png" alt="" />
+              {isAuthenticated && (
+                <React.Fragment>
+                  <div className="row d-flex">
+                    <div className="input-group w-75 px-3 mx-auto my-2">
+                      <div className="input-group-prepend px-2">
+                        <img className="wowIco" src="src/rb3.png" alt="" />
+                      </div>
+                      <textarea
+                        type="text"
+                        className="form-control searchBar text-light"
+                        placeholder="Paste simC"
+                        aria-label="simC"
+                        value={simcInput}
+                        onChange={(event) => setsimcInput(event.target.value)}
+                      />
+                      <div className="input-group-append">
+                        <button
+                          className="btn btn-outline-secondary searchBar"
+                          onClick={submitSimC}
+                          type="button"
+                        >
+                          <i className="fas fa-sync-alt searchIcon"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <textarea
-                    type="text"
-                    className="form-control searchBar text-light"
-                    placeholder="Paste simC"
-                    aria-label="simC"
-                    value={simcInput}
-                    onChange={(event) => setsimcInput(event.target.value)}
-                  />
-                  <div className="input-group-append">
-                    <button
-                      className="btn btn-outline-secondary searchBar"
-                      onClick={submitSimC}
-                      type="button"
-                    >
-                      <i className="fas fa-sync-alt searchIcon"></i>
-                    </button>
+                  <div className="row d-flex">
+                    <h5 className="mx-auto">OR</h5>
                   </div>
-                </div>
-              </div>
-              <div className="row d-flex">
-                <h5 className="mx-auto">OR</h5>
-              </div>
-              <div className="row d-flex">
-                <div className="input-group w-75 px-3 mx-auto my-2">
-                  <div className="input-group-prepend px-2">
-                    <img className="wowIco" src="src/rb3.png" alt="" />
+                  <div className="row d-flex">
+                    <div className="input-group w-75 px-3 mx-auto my-2">
+                      <div className="input-group-prepend px-2">
+                        <img className="wowIco" src="src/rb3.png" alt="" />
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control searchBar text-light"
+                        placeholder="New Report ID"
+                        aria-label="Report ID"
+                        value={reportInput}
+                        onChange={(event) => setReportInput(event.target.value)}
+                      />
+                      <div className="input-group-append">
+                        <button
+                          className="btn btn-outline-secondary searchBar"
+                          onClick={submitReport}
+                          type="button"
+                        >
+                          <i className="fas fa-sync-alt searchIcon"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <input
-                    type="text"
-                    className="form-control searchBar text-light"
-                    placeholder="New Report ID"
-                    aria-label="Report ID"
-                    value={reportInput}
-                    onChange={(event) => setReportInput(event.target.value)}
-                  />
-                  <div className="input-group-append">
-                    <button
-                      className="btn btn-outline-secondary searchBar"
-                      onClick={submitReport}
-                      type="button"
-                    >
-                      <i className="fas fa-sync-alt searchIcon"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
+                </React.Fragment>
+              )}
               <div className="row d-flex flex-wrap">
                 {players
                   .sort((a, b) => a.name - b.name)
@@ -121,9 +146,17 @@ const PageHeader = () => {
           </div>
         </div>
       </div>
-
       <div className="PageHeaderWrapper align-items-center">
         <div className="PageHeader unselectable bg-dark rounded d-flex mt-2 mx-2 align-items-center">
+          <button
+            className="m-2 p-3 btn wowBtn btn-outline-secondary"
+            onClick={() => {
+              isAuthenticated ? logout() : loginWithRedirect();
+            }}
+          >
+            {isAuthenticated ? <i className="fas fa-times" /> : <i className="fas fa-users" />}
+          </button>
+          ;
           <div className="container px-0">
             <div className="row w-100 align-self-center d-flex justify-content-between mx-0">
               <div className="col"></div>
