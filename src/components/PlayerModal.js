@@ -25,7 +25,7 @@ const PlayerModal = ({ player }) => {
     <div className="PlayerModalWrapper align-items-center">
       <a
         className="armoryLink"
-        href={`https://worldofwarcraft.com/en-us/character/${GUILD_REGION}/${GUILD_REALM}/${player.name}`}
+        href={`https://worldofwarcraft.com/en-gb/character/${GUILD_REGION}/${GUILD_REALM}/${player.name}`}
         rel="noopener noreferrer"
         target="_blank"
       >

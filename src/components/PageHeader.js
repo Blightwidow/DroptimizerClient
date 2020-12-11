@@ -66,7 +66,7 @@ const PageHeader = () => {
           <div className="modal-content bg-dark text-light">
             <div className="modal-header ">
               <h5 className="modal-title align-self-center d-flex" id="exampleModalLongTitle">
-                {`Bastion Raid Roster - ${players.length} Players`}
+                {`OG Feedback Raid Roster - ${players.length} Players`}
               </h5>
               <button
                 type="button"

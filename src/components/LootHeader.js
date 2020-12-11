@@ -17,7 +17,7 @@ const LootHeader = ({ item }) => {
               <a
                 className="lootLink d-inline-flex align-items-center pr-2"
                 href="#!"
-                data-wowhead={`item=${item.id}&ilvl=415`}
+                data-wowhead={`item=${item.id}`}
                 data-wh-rename-link="true"
               >
                 <img
@@ -32,7 +32,7 @@ const LootHeader = ({ item }) => {
               <a
                 className="align-self-center"
                 data-wh-rename-link="true"
-                href={`https://wowhead.com/item=${item.id}&ilvl=415`}
+                href={`https://wowhead.com/item=${item.id}`}
                 rel="noopener noreferrer"
                 target="_blank"
               >
