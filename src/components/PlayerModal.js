@@ -1,8 +1,11 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import Moment from 'react-moment';
 
 import { API_DOMAIN, GUILD_REALM, GUILD_REGION } from '../config';
 import { useLazyApi } from '../hooks';
+import Tooltip from './Tooltip';
+import { getPlayerIcon } from '../utils';
 
 const PlayerModal = ({ player }) => {
   const { isAuthenticated } = useAuth0();
@@ -35,6 +38,28 @@ const PlayerModal = ({ player }) => {
                     ?alt=/shadow/avatar/2-1.jpg`}
             />
             <h5 className={`PlayerName pt-1 class${player.class}`}>{player.name}</h5>
+            <div className="tooltipWrapper">
+              <img
+                className="roleIco ml-3 align-self-center"
+                src="src/wowico.png"
+                alt=""
+                height="25px"
+              />
+              <Tooltip>
+                <div className="row justify-content-center text-light rbttText2">
+                  Last Simc Update
+                </div>
+                <div className="row justify-content-center text-light rbttText">
+                  {player.simcLastModified ? (
+                    <Moment className="text-justify-center" fromNow>
+                      {player.simcLastModified}
+                    </Moment>
+                  ) : (
+                    'No simc yet'
+                  )}
+                </div>
+              </Tooltip>
+            </div>
             {isAuthenticated && (
               <button
                 className="btn btn-outline-secondary searchBar ml-auto"

@@ -1,38 +1,11 @@
 import React from 'react';
 import Moment from 'react-moment';
+import { getPlayerIcon } from '../utils';
 
 import Tooltip from './Tooltip';
 
-const SPECS = {
-  'Protection Warrior': 'Tank',
-  'Protection Paladin': 'Tank',
-  'Holy Paladin': 'Healer',
-  'Discipline Priest': 'Healer',
-  'Holy Priest': 'Healer',
-  'Blood Death Knight': 'Tank',
-  'Restoration Shaman': 'Healer',
-  'Brewmaster Monk': 'Tank',
-  'Mistweaver Monk': 'Healer',
-  'Guardian Druid': 'Tank',
-  'Restoration Druid': 'Healer',
-  'Vengeance Demon Hunter': 'Tank',
-};
-
 const PlayerHeader = ({ rank, maxIncrease, player }) => {
-  const roleIcon = React.useMemo(() => {
-    if (!player.spec) {
-      return 'wowico';
-    }
-
-    const role = SPECS[player.spec] || 'default';
-    const mapping = {
-      Tank: 'tankico',
-      Healer: 'healerico',
-      default: 'dpsico',
-    };
-
-    return mapping[role] || mapping.default;
-  }, [player.spec]);
+  const roleIcon = React.useMemo(() => getPlayerIcon(player), [player.spec]);
   const dpsIncrease = Math.round(player.dps - player.baseDps);
   const percentIncrease = Math.round((1000 * (player.dps - player.baseDps)) / player.baseDps) / 10;
   const globalIncrease = Math.min(98, Math.round((dpsIncrease * 100) / maxIncrease));
@@ -42,7 +15,7 @@ const PlayerHeader = ({ rank, maxIncrease, player }) => {
     <div className="PlayerListItem rounded">
       <div className="PlayerWrapper unselectable">
         <div className="PlayerHeader align-items-center row p-2">
-          <div className="col-7 col-md-4 pr-0 align-self-center order-first">
+          <div className="col-7 col-md-4 pr-0 mb-2 align-self-center order-first">
             <div className="row">
               <h4 className={`PlayerRank text-center pt-1 pl-2 rank${rank}`}>{rank}</h4>
               <a
@@ -106,8 +79,7 @@ const PlayerHeader = ({ rank, maxIncrease, player }) => {
               </div>
             </div>
           </div>
-          <div className="w-100 d-md-none"></div>
-
+          <hr/>
           <div className="col d-block d-md-none"></div>
           <div className="col-8 col-md-4 px-2 mx-4 ml-2 align-self-center">
             <div className="row justify-content-between">

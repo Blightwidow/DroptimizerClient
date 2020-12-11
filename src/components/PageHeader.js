@@ -131,6 +131,7 @@ const PageHeader = () => {
                       </div>
                     </div>
                   </div>
+                  <hr />
                 </React.Fragment>
               )}
               <div className="row d-flex flex-wrap">

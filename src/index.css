@@ -8,6 +8,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+hr {
+  margin: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
 .unselectable {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
