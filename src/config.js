@@ -17,6 +17,10 @@ export const BOSSES = [
         searchTerms: ['Leather', 'Leg', 'Crit', 'Mastery'],
       },
       {
+        id: 182993,
+        searchTerms: ['Leather', 'Leg', 'Crit', 'Mastery'],
+      },
+      {
         id: 183027,
         searchTerms: ['Plate', 'Feet', 'Haste', 'Mastery', 'Boot'],
       },
