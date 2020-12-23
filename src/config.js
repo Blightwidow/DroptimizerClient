@@ -62,6 +62,10 @@ export const BOSSES = [
         id: 184017,
         searchTerms: ['trinket', 'agi', 'strength'],
       },
+      {
+        id: 183892,
+        searchTerms: [],
+      },
     ],
   },
   {
@@ -100,6 +104,10 @@ export const BOSSES = [
         id: 184020,
         searchTerms: ['trinket', 'intel', 'heal'],
       },
+      {
+        id: 183893,
+        searchTerms: [],
+      },
     ],
   },
   {
@@ -129,6 +137,10 @@ export const BOSSES = [
       {
         id: 184021,
         searchTerms: ['trinket', 'intel'],
+      },
+      {
+        id: 183888,
+        searchTerms: [],
       },
     ],
   },
@@ -172,6 +184,10 @@ export const BOSSES = [
         id: 184023,
         searchTerms: ['trinket', 'strength', 'tank'],
       },
+      {
+        id: 183891,
+        searchTerms: [],
+      },
     ],
   },
   {
@@ -201,6 +217,10 @@ export const BOSSES = [
       {
         id: 184025,
         searchTerms: ['trinket', 'agility', 'strength'],
+      },
+      {
+        id: 183889,
+        searchTerms: [],
       },
     ],
   },
@@ -239,6 +259,10 @@ export const BOSSES = [
       {
         id: 184024,
         searchTerms: ['trinket', 'intel', 'agi', 'strength', 'haste'],
+      },
+      {
+        id: 183890,
+        searchTerms: [],
       },
     ],
   },
@@ -308,6 +332,14 @@ export const BOSSES = [
         id: 184027,
         searchTerms: ['trinket', 'agi', 'strength', 'vers'],
       },
+      {
+        id: 183895,
+        searchTerms: [],
+      },
+      {
+        id: 183894,
+        searchTerms: [],
+      },
     ],
   },
   {
@@ -349,6 +381,22 @@ export const BOSSES = [
       {
         id: 184031,
         searchTerms: ['trinket', 'agi', 'strength', 'tank'],
+      },
+      {
+        id: 183896,
+        searchTerms: [],
+      },
+      {
+        id: 183897,
+        searchTerms: [],
+      },
+      {
+        id: 183898,
+        searchTerms: [],
+      },
+      {
+        id: 183899,
+        searchTerms: [],
       },
     ],
   },
