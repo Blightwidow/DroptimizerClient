@@ -9,6 +9,7 @@
     "moment": "^2.24.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-icons": "^4.1.0",
     "react-moment": "^0.8.4",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1"

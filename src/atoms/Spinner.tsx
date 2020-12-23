@@ -1,14 +1,15 @@
-import React from "react";
+import React from 'react';
 
-const Spinner: React.FC = () => {
+const Spinner: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = (props) => {
   return (
     <svg
-      width="200"
-      height="200"
+      width="50"
+      height="50"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
-      className="lds-ellipsis"
+      style={{ margin: 'auto' }}
+      {...props}
     >
       <circle cx="84" cy="50" r="0" fill="#8e8e8e">
         <animate

@@ -1,20 +1,42 @@
-import React from "react";
-import styled from "styled-components";
-import { Link, Switch, Route } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
 
-import ItemMenu from "./ItemMenu";
-import Menu from "../atoms/Menu";
-import Spinner from "../atoms/Spinner";
-import { useBosses } from "../utils/data";
+import Menu from '../atoms/Menu';
+import MenuItem from '../atoms/MenuItem';
+import Spinner from '../atoms/Spinner';
+import { useBosses } from '../utils/data';
+import { UrlParameters } from '../utils/types';
 
 const Wrapper = styled.div`
   display: flex;
-  grid-area: bossMenu;
-  border-bottom: 1px solid #3d3d3d;
+  margin-bottom: auto;
+`;
+
+const BossImg = styled.img`
+  height: 40px;
+  margin-right: 12px;
+  overflow: hidden;
+  border-radius: 4px;
+  width: 40px;
+  object-fit: cover;
+`;
+
+const BossContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+`;
+
+const BossName = styled.p`
   font-weight: 600;
+  margin: auto 0;
+  width: 100%;
 `;
 
 const BossMenu: React.FC = () => {
+  const { bossId } = useParams<UrlParameters>();
   const bosses = useBosses();
 
   if (!bosses) {
@@ -22,27 +44,23 @@ const BossMenu: React.FC = () => {
   }
 
   return (
-    <React.Fragment>
-      <Menu>
+    <Wrapper>
+      <Menu placeholder="No bosses found">
         {Object.values(bosses).map((boss) => (
-          <Wrapper key={boss.id}>
-            <img
-              src={`/images/Boss_icon_${boss.name.replaceAll(" ", "")}.png`}
-              alt={boss.name}
-            />
-            <div>
-              <p>
-                <Link to={`/boss/${boss.id}`}>{boss.name}</Link>
-              </p>
-            </div>
-          </Wrapper>
+          <Link key={boss.id} to={`/boss/${boss.id}`}>
+            <MenuItem aria-selected={Number.parseInt(bossId) === boss.id}>
+              <BossImg
+                alt={boss.name}
+                src={`/images/Boss_icon_${boss.name.replaceAll(' ', '')}.png`}
+              />
+              <BossContent>
+                <BossName>{boss.name}</BossName>
+              </BossContent>
+            </MenuItem>
+          </Link>
         ))}
       </Menu>
-
-      <Switch>
-        <Route path={`/boss/:bossId`} children={<ItemMenu />} />
-      </Switch>
-    </React.Fragment>
+    </Wrapper>
   );
 };
 

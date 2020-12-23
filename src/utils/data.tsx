@@ -1,6 +1,7 @@
-import React from "react";
-import { Player, Boss, Item, Upgrade } from "./types";
-import { useApi } from "./api";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React from 'react';
+import { Player, Boss, Item, Upgrade } from './types';
+import { useApi } from './api';
 
 export interface DataState {
   players?: { [playerId: number]: Player };
@@ -92,16 +93,15 @@ export const DataProvider: React.FC = (props) => {
 };
 
 export const usePlayers = () => {
-  const { data, loading } = useApi("v2/players");
+  const { data, loading } = useApi('v2/players');
   const { state, dispatch } = React.useContext(DataContext);
 
   React.useEffect(() => {
     const isNewData: boolean = !data?.every(
-      (player: any) =>
-        JSON.stringify(player) === JSON.stringify(state.players?.[player.id])
+      (player: any) => JSON.stringify(player) === JSON.stringify(state.players?.[player.id])
     );
 
-    if (!loading && isNewData) {
+    if (!loading && data && isNewData) {
       dispatch({
         type: ActionType.setPlayers,
         payload: data,
@@ -112,17 +112,16 @@ export const usePlayers = () => {
   return state.players;
 };
 
-export const useBosses = (): DataState["bosses"] => {
-  const { data, loading } = useApi("v2/bosses");
+export const useBosses = (): DataState['bosses'] => {
+  const { data, loading } = useApi('v2/bosses');
   const { state, dispatch } = React.useContext(DataContext);
 
   React.useEffect(() => {
     const isNewData: boolean = !data?.every(
-      (boss: any) =>
-        JSON.stringify(boss) === JSON.stringify(state.bosses?.[boss.id])
+      (boss: any) => JSON.stringify(boss) === JSON.stringify(state.bosses?.[boss.id])
     );
 
-    if (!loading && isNewData) {
+    if (!loading && data && isNewData) {
       dispatch({
         type: ActionType.setBosses,
         payload: data,
@@ -140,11 +139,10 @@ export const useItems = (bossId: number) => {
   React.useEffect(() => {
     const isNewData: boolean = !data?.every(
       (item: Item) =>
-        JSON.stringify(item) ===
-        JSON.stringify(state.bosses?.[bossId]?.items?.[item.id])
+        JSON.stringify(item) === JSON.stringify(state.bosses?.[bossId]?.items?.[item.id])
     );
 
-    if (!loading && isNewData) {
+    if (!loading && data && isNewData) {
       dispatch({
         type: ActionType.setItems,
         payload: {
@@ -163,14 +161,13 @@ export const useUpgrades = (itemId: number) => {
   const { state, dispatch } = React.useContext(DataContext);
 
   React.useEffect(() => {
-    const isNewData: boolean =
-      JSON.stringify(data) !== JSON.stringify(state.upgrades?.[itemId]);
+    const isNewData: boolean = JSON.stringify(data) !== JSON.stringify(state.upgrades?.[itemId]);
 
-    if (!loading && isNewData) {
+    if (!loading && data && isNewData) {
       dispatch({
         type: ActionType.setUpgrades,
         payload: {
-          upgrades: data,
+          upgrades: data.sort((a: Upgrade, b: Upgrade) => b.dps - b.baseDps - (a.dps - a.baseDps)),
           itemId,
         },
       });

@@ -40,7 +40,7 @@ export const useApi = (path: string, options: RequestInit = {}) => {
   React.useEffect(() => {
     lazyLoad(options);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [path]);
+  }, [path, JSON.stringify(options)]);
 
   return state;
 };
