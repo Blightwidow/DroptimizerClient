@@ -5,11 +5,11 @@ import Moment from 'react-moment';
 import { API_DOMAIN, GUILD_REALM, GUILD_REGION } from '../config';
 import { useLazyApi } from '../hooks';
 import Tooltip from './Tooltip';
-import { getPlayerIcon } from '../utils';
 
 const PlayerModal = ({ player }) => {
-  const { isAuthenticated } = useAuth0();
+  const { user } = useAuth0();
   const [deleteUser] = useLazyApi(`${API_DOMAIN}/1/character/${player.name}`, { method: 'DELETE' });
+  const { permissions = [] } = (user || {})[`https://api.loot.odrel.com/roles`] || {};
 
   const deleteCharacter = React.useCallback(
     async (event) => {
@@ -60,7 +60,7 @@ const PlayerModal = ({ player }) => {
                 </div>
               </Tooltip>
             </div>
-            {isAuthenticated && (
+            {permissions.includes('admin') && (
               <button
                 className="btn btn-outline-secondary searchBar ml-auto"
                 onClick={deleteCharacter}
