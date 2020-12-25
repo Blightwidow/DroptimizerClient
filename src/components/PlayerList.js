@@ -13,7 +13,7 @@ const PlayerList = ({ item }) => {
     const upgrades = await Promise.all(
       players.map((player) => axios.get(`${API_DOMAIN}/1/upgrade/${player.name}/${item.id}`))
     ).then((responses) =>
-      responses.map((response) => response.data).filter((upgrade) => !!upgrade)
+      responses.map((response) => response.data).reduce((acc, upgrade) => [...acc, ...upgrade], [])
     );
     setUpgrades(upgrades.sort((a, b) => b.dps - b.baseDps - (a.dps - a.baseDps)));
   };
