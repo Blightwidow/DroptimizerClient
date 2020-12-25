@@ -59,10 +59,6 @@ export const BOSSES = [
         searchTerms: ['leather', 'waist', 'crit', 'vers'],
       },
       {
-        id: 184017,
-        searchTerms: ['trinket', 'agi', 'strength'],
-      },
-      {
         id: 183892,
         searchTerms: [],
       },
@@ -95,14 +91,6 @@ export const BOSSES = [
       {
         id: 184019,
         searchTerms: ['trinket', 'intel'],
-      },
-      {
-        id: 184018,
-        searchTerms: ['trinket', 'agi', 'strength', 'tank'],
-      },
-      {
-        id: 184020,
-        searchTerms: ['trinket', 'intel', 'heal'],
       },
       {
         id: 183893,
@@ -175,10 +163,6 @@ export const BOSSES = [
       {
         id: 183024,
         searchTerms: ['leather', 'legs', 'haste', 'mastery'],
-      },
-      {
-        id: 184022,
-        searchTerms: ['trinket', 'intel', 'heal'],
       },
       {
         id: 184023,
@@ -373,14 +357,6 @@ export const BOSSES = [
       {
         id: 184030,
         searchTerms: ['trinket', 'intel', 'agi', 'strength'],
-      },
-      {
-        id: 184029,
-        searchTerms: ['trinket', 'intel', 'heal'],
-      },
-      {
-        id: 184031,
-        searchTerms: ['trinket', 'agi', 'strength', 'tank'],
       },
       {
         id: 183896,
