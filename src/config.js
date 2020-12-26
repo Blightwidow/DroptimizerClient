@@ -351,10 +351,6 @@ export const BOSSES = [
         searchTerms: ['finger', 'ring', 'haste', 'mastery'],
       },
       {
-        id: 184024,
-        searchTerms: ['trinket', 'intel', 'crit'],
-      },
-      {
         id: 184030,
         searchTerms: ['trinket', 'intel', 'agi', 'strength'],
       },
