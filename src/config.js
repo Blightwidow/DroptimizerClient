@@ -355,6 +355,10 @@ export const BOSSES = [
         searchTerms: ['trinket', 'intel', 'agi', 'strength'],
       },
       {
+        id: 184028,
+        searchTerms: ['trinket', 'intel', 'agi', 'strength'],
+      },
+      {
         id: 183896,
         searchTerms: [],
       },
