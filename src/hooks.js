@@ -28,7 +28,7 @@ export const useLazyApi = (url, options = {}) => {
       const { ...fetchOptions } = options;
       const accessToken = await getAccessTokenSilently({
         audience: 'https://api.loot.odrel.com',
-        scope: 'admin',
+        scope: 'admin write:simc',
       });
       const res = await fetch(url, {
         ...fetchOptions,

@@ -12,6 +12,7 @@ ReactDOM.render(
     clientId={AUTH_CLIENT_ID}
     redirectUri={window.location.origin}
     audience="https://api.loot.odrel.com"
+    scope="admin write:simc"
   >
     <App />
   </Auth0Provider>,
